@@ -1,0 +1,5 @@
+python track_face_video_3_CSRT.py
+python track_face_video_3_GOTURN.py
+python track_face_video_3_KCF.py
+python track_face_video_3_MEDIANFLOW.py
+python track_face_video_3_MOSSE.py

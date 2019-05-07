@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+*.mp4
+*.avi
+
+computer_vision/model_data/
+computer_vision/data/

@@ -1,0 +1,70 @@
+
+
+Imagen 0 with 5 people
+Time 3.6276509761810303, people 5, accuracy 100.0
+Time 40.02985882759094, people 6, accuracy 60.0
+Time 12.66790509223938, people 6, accuracy 100.0
+Time 4.095499753952026, people 6, accuracy 80.0
+
+
+Imagen 1 with 7 people
+Time 1.2397363185882568, people 6, accuracy 85.71428571428571
+Time 39.14500331878662, people 6, accuracy 85.71428571428571
+Time 10.413217067718506, people 6, accuracy 87.5
+Time 1.7883470058441162, people 6, accuracy 71.42857142857143
+
+
+Imagen 2 with 13 people
+Time 1.2959742546081543, people 9, accuracy 69.23076923076923
+Time 37.134711265563965, people 6, accuracy 69.23076923076923
+Time 9.22532606124878, people 6, accuracy 69.23076923076923
+Time 1.9137747287750244, people 6, accuracy 69.23076923076923
+
+
+Imagen 3 with 12 people
+Time 1.3313145637512207, people 12, accuracy 100.0
+Time 36.913758277893066, people 6, accuracy 83.33333333333334
+Time 9.7022225856781, people 6, accuracy 100.0
+Time 2.5029637813568115, people 6, accuracy 50.0
+
+
+Imagen 4 with 10 people
+Time 1.2553656101226807, people 10, accuracy 100.0
+Time 36.75181818008423, people 6, accuracy 100.0
+Time 11.890231609344482, people 6, accuracy 100.0
+Time 5.167762517929077, people 6, accuracy 90.0
+
+
+Imagen 5 with 3 people
+Time 1.2434556484222412, people 5, accuracy 60.0
+Time 36.941611766815186, people 6, accuracy 42.857142857142854
+Time 7.554027795791626, people 6, accuracy 100.0
+Time 1.9518177509307861, people 6, accuracy 100.0
+
+
+Imagen 6 with 5 people
+Time 1.2209923267364502, people 1, accuracy 20.0
+Time 36.40605616569519, people 6, accuracy 20.0
+Time 7.445823431015015, people 6, accuracy 40.0
+Time 1.8846368789672852, people 6, accuracy 20.0
+
+
+Imagen 7 with 5 people
+Time 1.216996192932129, people 5, accuracy 100.0
+Time 36.6312415599823, people 6, accuracy 100.0
+Time 7.057054758071899, people 6, accuracy 71.42857142857143
+Time 2.004570245742798, people 6, accuracy 83.33333333333334
+
+
+Imagen 8 with 17 people
+Time 1.248232364654541, people 18, accuracy 94.44444444444444
+Time 38.037521839141846, people 6, accuracy 70.83333333333334
+Time 8.045188426971436, people 6, accuracy 70.58823529411765
+Time 2.9069156646728516, people 6, accuracy 52.94117647058824
+
+
+Imagen 9 with 10 people
+Time 1.2028145790100098, people 10, accuracy 100.0
+Time 37.62955570220947, people 6, accuracy 76.92307692307693
+Time 7.296696424484253, people 6, accuracy 100.0
+Time 2.19325852394104, people 6, accuracy 70.0
