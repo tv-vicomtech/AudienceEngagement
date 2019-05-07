@@ -1,0 +1,6 @@
+tmp=$(http GET localhost:8005/api/v1/devices/p1)
+echo $tmp > Desktop/p1_devices.txt
+tmp=$(http GET localhost:8005/api/v1/database/p1)
+echo $tmp > Desktop/p1_database.txt
+tmp=$(http GET localhost:8005/api/v1/locations/p1)
+echo $tmp > Desktop/p1_locations.txt
