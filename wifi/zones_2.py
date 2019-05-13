@@ -136,7 +136,7 @@ for mac in to_find:
 					values_2b_find[np.remainder(cont_2,n_values)]=comp_2[1]
 					values_3b_find[np.remainder(cont_2,n_values)]=comp_2[2]
 				cont_2+=1
-				vec_find = (np.mean(values_2b),np.mean(values_3b))
+				vec_find = (np.mean(values_2b_find),np.mean(values_3b_find))
 				min_distance = 9999999
 				cnt_4=0
 				for cmp_val in values_zones:
