@@ -8,8 +8,28 @@ This system has a vision technique system based on tensorflow and a wifi trackin
 
 ## Computer vision
 
+### Recomendations
+
+### Metrics
+
 ### Ussage
+
+### Instalation
+
+### Test done
+
+### Improvements
 
 ## Wi-Fi
 
-### Ussage	
+### Recomendations
+
+### Metrics
+
+### Ussage
+
+### Instalation
+
+### Test done
+
+### Improvements
