@@ -62,6 +62,19 @@ in the case of wanting to run all the files in cascade it can be done with the f
 
 ## Instalation
 
+The instalation for this needs the following:
+
+- Python 3 environment: mkvirtualenv -a $(pwd) createdenv
+- Tensorflow: pip install tensorflow or pip install tensorflow-gpu for usage in gpu
+- OpenCV: pip install opencv-python==3.4.5.2
+- scipy: pip install scipy
+- yaml: pip install pyyaml
+- cvlib: pip install cvlib
+- dlib: pip install dlib
+- face_recognition: pip install face_recognition
+- imageai: Download [the image ai from the link](https://github.com/OlafenwaMoses/ImageAI/releases/download/2.0.2/imageai-2.0.2-py3-none-any.whl)and in that folder pip install imageai-2.0.2-py3-none-any.whl
+- matplotlib: pip install matplotlib
+
 ## Test done
 
 All the test done are runned with two videos, one with a low quantity of people and good light conditions, and the other with bad conditions and high number of people. The test done has been:
