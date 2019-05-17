@@ -72,7 +72,7 @@ The instalation for this needs the following:
 - cvlib: pip install cvlib
 - dlib: pip install dlib
 - face_recognition: pip install face_recognition
-- imageai: Download [the image ai from the link](https://github.com/OlafenwaMoses/ImageAI/releases/download/2.0.2/imageai-2.0.2-py3-none-any.whl)and in that folder pip install imageai-2.0.2-py3-none-any.whl
+- imageai: Download [the image ai from the link](https://github.com/OlafenwaMoses/ImageAI/releases/download/2.0.2/imageai-2.0.2-py3-none-any.whl) and in that folder pip install imageai-2.0.2-py3-none-any.whl
 - matplotlib: pip install matplotlib
 
 ## Test done
