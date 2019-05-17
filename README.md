@@ -36,25 +36,27 @@ There is a command to run the computer vision which is symply running the python
 
 **python filename.py**
 
-The different files are:
+The important files are:
 
 - image_divider.py: This file performs two actions, the division of images and the preprocessing with the brightness, contrast and gamma correction. The important constants that can be tunned are gamma (the deggree for the correction of the image in the gamma), contrast (the deggree for the correction of the image in the contrast), color (Selection of color image, 1, or grayscale, 0) and img (selecting the image or frame to read).
-- pose_detection.py: This file performs the detection of different parts of the 
-- pose_detection_seguir.py: This file performs the same action as the file pose_detection.py but it adds the functions for tracking, the important constans are the same as before but also the number of frames between two detection frames called n_frames_to_detect, it is also important the variable trackingQuality_threshold, which determine the quality to following trade-off and the variable sec that deteermines the number of seconds to show the movement
-- pose_detection_seguir_face_arms.py: This file performs 
-- prueba_face_detection_image.py: This file performs
-- prueba_face_detection_videos.py: This file performs
-- prueba_object_detection_image.py: This file performs
-- prueba_object_detection_video.py: This file performs
-- track_face_video.py: This file performs
-- track_face_video_2.py: This file performs
-- track_face_video_seguir.py: This file performs
-- track_face_video_2_seguir.py: This file performs
-- track_object_video.py: This file performs
-- track_object_video_2.py: This file performs
-- track_object_video_3.py: This file performs
-- track_pose_detection.py: This file performs
-- yolo.py: This file performs
+- pose_detection.py: This file performs the detection of different joints, being them eyes, ears, nose, shoulders, elbows, hands, hips, kness and feet. With those joints some different compositionts had been done:
+    + Only points: Only the points of the joints detected are drawn, it can be seen in the overlay_image_keypoints image.
+    + Face: Only the points of the points on the face are drawn, it can be seen in the overlay_image_keypoints image.
+    + Only skeleton: Only the skeleton connecting the joints detected is drawn, it can be seen in the overlay_image_skeleton image.
+    + Points and skeleton: Both the skeleton connecting the joints detected and the joints are drawn, it can be seen in the overlay_image image.
+    + Arms: In this case only the joints in the arms are drawn, being them in the images overlay_image_right_arm and overlay_image_left_arm for each one of the arms.
+    + Mean face point: In this case the face position is calculated by averaging the position of all the points in the face. It is in the image overlay_image_means and can be used with more points than the face if wanted.
+    + Chest: In this case only the joints in the chest are drawn, being them in the image overlay_image_chest.
+    + Attention points: In this case the points used for the attention detection, eyes, midle of eyes and nose. This can be seen in the image overlay_image_att.
+- pose_detection_seguir.py: This file performs the same action as the file pose_detection.py but it adds the functions for tracking, the important constans are the same as before but also the number of frames between two detection frames called n_frames_to_detect, it is also important the variable trackingQuality_threshold, which determine the quality to following trade-off and the variable sec that deteermines the number of seconds to show the movement.
+- prueba_face_detection_image.py: This file performs the face detection in an image, the most important variables are f, being the file name of the faces to analyse and all the other variables in the file faces.txt
+- prueba_face_detection_videos.py: This file performs the same action as the previous one with the difference of doing to all the frames in a video. The important variables are the input movie.
+- prueba_object_detection_image.py: This file performs the same action as the face detection image but with objects instead of persons.
+- prueba_object_detection_video.py: This file performs the same action as the face detection video but with objects instead of persons.
+- track_face_video_2.py: This file performs This file implements the tracking to the video face detection, being the new important variables the trackingQuality_threshold, control of the tradeof between the tracking quality and speed, n_frames_to_detect, number of frames between two detection frames.
+- track_face_video_2_seguir.py: This file performs the same action as track_face_video_2 adding the movement following, being them the representation of the last points with three colors depending on the recent of the mesurement.
+- track_object_video_2.py: This file performs the same as the tracking of faces to the object.
+- track_pose_detection.py: This file performs the same as the tracking to the people joints.
 
 in the case of wanting to run all the files in cascade it can be done with the following command sh run_all.sh
 
@@ -62,11 +64,31 @@ in the case of wanting to run all the files in cascade it can be done with the f
 
 ## Test done
 
+All the test done are runned with two videos, one with a low quantity of people and good light conditions, and the other with bad conditions and high number of people. The test done has been:
+
+- Person detection: In this test it has been seen that the persons detection is very dependable on the conditions and the distance to the camera.
+
+- Face detection: In this case the results are very similar to the previous test but reduce the computation time as it search for a smaller part.
+
+- Chest detection: In this case in the good video the results are very similar but in the other the results are worse as a the chest is more difficult to see in that conditions.
+
+- Attention detection: In this test the points for the attention detection is shown but the most important part is the file written with the attention direction of each tracked person at each moment.
+
+- Movement tracking: In this test the position across the time of the people is stored in a variable, which is then used to show the path taken for that person.
+
 ## Improvements
+
+The main improvement to implement is and improvement in the detetion that although a preprocessing is implemented.
+
+Other improvement is the solution of the bug where a person is not detected and then is detected again the movement counter is reset.
 
 # Wi-Fi
 
 ## Parts
+
+- Server
+
+- Scanner
 
 ## Metrics
 
