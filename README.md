@@ -89,30 +89,119 @@ All the test done are runned with two videos, one with a low quantity of people 
 
 - Movement tracking: In this test the position across the time of the people is stored in a variable, which is then used to show the path taken for that person.
 
-## Improvements
-
-The main improvement to implement is and improvement in the detetion that although a preprocessing is implemented.
-
-Other improvement is the solution of the bug where a person is not detected and then is detected again the movement counter is reset.
-
 # Wi-Fi
 
 ## Parts
 
-- Server
+This technique is composed by two parts:
 
-- Scanner
+- Server: This part is in charge of storing the information and computing the zones. In this case is done in a computer
+
+- Scanner: This part is in charge of dettecting all the devices and sending it to the server. In this case is done in severall raspberry Pi devices with wifi dongles.
 
 ## Metrics
 
+In this case the metrics obtained are:
+
+- Position of people: This is known by ussing knowing the zones and seeing the devices in that zone, this is stored in a vector called zones.
+- Number of people: This is known by seing the lines of the devices.json file and the vector to_find.
+
 ## Ussage
 
+In order to use this part it needs to be installed in the server computer and in the scanner devices(Raspberry Pi), it is needed to be first run the server by going to 
+
+$ cd $GOPATH/src/github.com/user/wifi_server/server/ai
+$ make
+
+and in another teminal
+
+$ cd $GOPATH/src/github.com/user/wifi_server/server/main
+$ go build -v
+$ ./main -port 8005 
+
+With this the server is up an running, the first group is not necesary but solves some errors. 
+
+The scanner devices are used by the commands
+
+$ wifi_scan -i YOURINTERFACE -monitor-mode
+
+this command is to allow the monitor mode in the interface
+
+$ wifi_scan -i YOURINTERFACE -device YOURDEVICE -family YOURFAMILY -server http://IP:PORT -scantime 300 -bluetooth -forever -passive -no-modify &
+
+This command allow the scanning and has different variables:
+
+1. i: this is followed by the interface of the wifi used as "wlan0".
+2. device: This is followed by the name of the scanning device for the localization as "Rasberry_PI_2B".
+3. family: This is followed by the family name, a way of relating all the measurements fron all the devices as "Localization"
+4. server: This is followed by the URL or IP of the server, if the IP is given the port of connection is needed, as "http://192.168.10.30:8005".
+5. scantime: This is followed by the maximum scanning time in seconds, as "300".
+6. forever: This tag make it to run in an infinity loop instead of only one time
+7. passive: This tag indicates that the scanning is passive and not active 
+8. no-modify: This tag is used to improve performance by not changing the interface mode to monitor in every loop.
+9. bluetooth: this tag indicates that it need to monitor both wifi and bluettoth signals.
+
 ## Instalation
+The scanner can be installed as:
+
+The instalation for this part needs Golang which can be download from [their web](https://golang.org/), go to the downloads folder and extract it to /usr/local, export the path as:
+
+$ export PATH=$PATH:/usr/local/go/bin
+
+and the gopath to the path inside the go folder created
+
+$ export GOPATH=$(go env GOPATH)
+
+Create a folder for the wifi_detection:
+
+$ mkdir $GOPATH/src/github.com/user/WIFI_detection
+
+and inside of it include all the files from the wifi_scanner folder. The file mac_vendors.txt has to be put in a known folder and write that path in the reverse.go file line 38.
+
+Go inside the folder and build the code
+
+$ cd $GOPATH/src/github.com/user/WIFI_detection
+$ go install
+
+Move the binary file to a accesible path with: 
+
+$ sudo mv $GOPATH/bin/wifi_scan /usr/local/bin
+
+and it can be run with the command:
+
+$ wifi_scan -i YOURINTERFACE -monitor-mode
+
+$ wifi_scan -i YOURINTERFACE -device YOURDEVICE -family YOURFAMILY -server http://IP:PORT -scantime 300 -forever -passive -no-modify &
+
+The server can be installed as:
+
+Install the C compiler and the go compiler, go as before and C with:
+
+$ sudo apt-get install g++
+
+Install mosquitto:
+
+$ sudo apt-get install mosquitto-clients mosquitto
+
+Create a folder for the wifi_detection:
+
+$ mkdir $GOPATH/src/github.com/user/WIFI_detection
+
+and inside of it include all the files from the wifi folder, go inside the folder and build the code
+
+$ go build -v
+$ ./main -port 8005
 
 ## Test done
 
-## Improvements
+The test done are:
+
+1. Devices across the room: In this test two scanning positions were used and compared, while the tracked devices were placed in different parts of the room at the same time.
+2. Devices in the same part of the room: In this test two scanning positions were used and compared, while the tracked devices were placed in the same part of the room at the same time.
+3. Devices moving: In this test two scanning positions were used and compared, while the tracked devices were moving in a determined path ath the same time.
+4. Devices covered by a body: In this case only the best position for the scannig devices were used, a human body were placed between the scanner and tracked device.
+5. Devices being used: In this case only the best position for the scannig devices were used, while this test was done the devices were hold as it were a normal usage.
 
 # Hybrid
 
-This part has not been done yet. This part is based on the results of both method to perform changes to the techniques and improve their results.
+This part is based on the results of both method to perform changes to the techniques and improve their results.
