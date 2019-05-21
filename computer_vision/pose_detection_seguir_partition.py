@@ -13,42 +13,49 @@ import posenet
 import math
 
 def adjust_gamma(image, gamma=1.0):
-    # build a lookup table mapping the pixel values [0, 255] to
-    # their adjusted gamma values
     invGamma = 1.0 / gamma
     table = np.array([((i / 255.0) ** invGamma) * 255
         for i in np.arange(0, 256)]).astype("uint8")
- 
-    # apply gamma correction using the lookup table
     return cv2.LUT(image, table)
 
-
+def print_move(cont,max_displacement,max_movement_single):
+    cont+=1
+    print("Total movement for the past {} seconds:".format(cont*5))
+    for item in max_displacement:
+        print(item)
+    print("Maximun movement for the past {} seconds:".format(cont*5))
+    for item_2 in max_movement_single:
+        print(item_2)
+    return cont
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=int, default=101)
-parser.add_argument('--cam_id', type=int, default=0)
-parser.add_argument('--cam_width', type=int, default=1280)
-parser.add_argument('--cam_height', type=int, default=720)
-parser.add_argument('--scale_factor', type=float, default=0.7125)
-parser.add_argument('--gamma', type=float, default=2)
-parser.add_argument('--contrast', type=float, default=15)
-parser.add_argument('--grid_size', type=float, default=2)
-parser.add_argument('--track_quality', type=int, default=8)
-parser.add_argument('--n_frames', type=int, default=19)
-parser.add_argument('--seconds_movement', type=float, default=5)
-parser.add_argument('--detection_zone', type=int, default=5) #5 for face 11 for upper body >17 for whole body 
+parser.add_argument('--model'           , type=int,     default=101)
+parser.add_argument('--cam_or_file'     , type=int,     default=0)
+parser.add_argument('--cam_id'          , type=int,     default=0)
+parser.add_argument('--cam_width'       , type=int,     default=1280)
+parser.add_argument('--cam_height'      , type=int,     default=720)
+parser.add_argument('--track_quality'   , type=int,     default=8)
+parser.add_argument('--n_frames'        , type=int,     default=19)
+parser.add_argument('--grid_size'       , type=int,     default=2)
+parser.add_argument('--gamma'           , type=int,     default=2)
+parser.add_argument('--contrast'        , type=int,     default=15)
+parser.add_argument('--seconds_movement', type=int,     default=5)
+parser.add_argument('--detection_zone'  , type=int,     default=5) #5 for face 11 for upper body >17 for whole body 
+parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
+parser.add_argument('--file_name'       , default="data/Dabadaba/Cam_1/1_1.mp4")
 args = parser.parse_args()
-
-
-
 
 def main():
 
     with tf.Session() as sess:
-        model_cfg, model_outputs = posenet.load_model(args.model, sess)
-        output_stride = model_cfg['output_stride']
 
-        cap                 = cv2.VideoCapture("data/Dabadaba/Cam_1/1_1.mp4")
+        model_cfg, model_outputs = posenet.load_model(args.model, sess)
+        output_stride            = model_cfg['output_stride']
+
+        if args.cam_or_file == 0:
+            cap                 = cv2.VideoCapture(args.file_name)
+        else:
+            cap                 = cv2.VideoCapture(args.cam_id)
 
         cap.set(4, args.cam_width)
         cap.set(3, args.cam_height)
@@ -84,13 +91,7 @@ def main():
         frame_count = 0
         while True:
             if int(time.time()-start)> ((cont+1)*args.seconds_movement):
-                cont+=1
-                print("Total movement for the past {} seconds:".format(cont*5))
-                for item in max_displacement:
-                    print(item)
-                print("Maximun movement for the past {} seconds:".format(cont*5))
-                for item_2 in max_movement_single:
-                    print(item_2)
+                cont=print_move(cont,max_displacement,max_movement_single)
 
             if frame_count==len_video:
                 break
@@ -101,13 +102,14 @@ def main():
                 break
 
             for ii in range(0,len(h_up)):
-                img_1=img[int(h_down[ii]):int(h_up[ii]),int(w_down[ii]):int(w_up[ii])]
-                img_1 = adjust_gamma(img_1, gamma=args.gamma) # input 
-                lab= cv2.cvtColor(img_1, cv2.COLOR_BGR2LAB)
+                img_1   = img[int(h_down[ii]):int(h_up[ii]),int(w_down[ii]):int(w_up[ii])]
+                img_1   = adjust_gamma(img_1, gamma=args.gamma) # input 
+                lab     = cv2.cvtColor(img_1, cv2.COLOR_BGR2LAB)
                 l, a, b = cv2.split(lab)
-                clahe = cv2.createCLAHE(clipLimit=args.contrast, tileGridSize=(args.grid_size,args.grid_size))
-                cl = clahe.apply(l)
-                limg = cv2.merge((cl,a,b))
+                clahe   = cv2.createCLAHE(clipLimit=args.contrast, tileGridSize=(args.grid_size,args.grid_size))
+                cl      = clahe.apply(l)
+                limg    = cv2.merge((cl,a,b))
+
                 img[int(h_down[ii]):int(h_up[ii]),int(w_down[ii]):int(w_up[ii])] = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
             
             img = img[int(height_min):int(height_fin),0:int(width)]
@@ -331,10 +333,7 @@ def main():
                             t_h= int(tracked_position.height())
                             t_x_bar= t_x + 0.5 * t_w
                             t_y_bar= t_y + 0.5 * t_h
-                            if ( ( t_y <= x_bar   <= (t_y + t_h)) and 
-                                 ( t_x <= y_bar   <= (t_x + t_w)) and 
-                                 ( x   <= t_y_bar <= (x   + w  )) and 
-                                 ( y   <= t_x_bar <= (y   + h  ))):
+                            if ((t_y<=x_bar<=(t_y+t_h))and(t_x<=y_bar<=(t_x+t_w))and(x<=t_y_bar<=(x+w))and(y<=t_x_bar<=(y+h))):
                                 matchedFid = fid
                                 centers=listofcenters[fid]
                                 centers=[(int(y_bar),int(x_bar))]+centers
@@ -405,19 +404,13 @@ def main():
             #cv2.imshow('posenet_means', overlay_image_means)
             #cv2.imshow('posenet_chest', overlay_image_chest)
             #cv2.imshow('posenet_att', overlay_image_att)
-            #output_movie.write(overlay_image)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
         print('Average FPS: ', frame_count / (time.time() - start))
         print('time: ', (time.time() - start))
-        print("Total movement for the past {} seconds:".format(time.time()))
-        for item in max_displacement:
-            print(item)
-        print("Maximun movement for the past {} seconds:".format(time.time()))
-        for item_2 in max_movement_single:
-            print(item_2)
+        cont=print_move(cont,max_displacement,max_movement_single)
 
 if __name__ == "__main__":
     main()
