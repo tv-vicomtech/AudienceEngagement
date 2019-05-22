@@ -29,20 +29,19 @@ def print_move(cont,max_displacement,max_movement_single):
     return cont
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model'           , type=int,     default=101)
 parser.add_argument('--cam_or_file'     , type=int,     default=0)
 parser.add_argument('--cam_id'          , type=int,     default=0)
-parser.add_argument('--cam_width'       , type=int,     default=1280)
-parser.add_argument('--cam_height'      , type=int,     default=720)
-parser.add_argument('--track_quality'   , type=int,     default=8)
-parser.add_argument('--n_frames'        , type=int,     default=19)
 parser.add_argument('--grid_size'       , type=int,     default=2)
-parser.add_argument('--gamma'           , type=int,     default=2)
-parser.add_argument('--contrast'        , type=int,     default=15)
 parser.add_argument('--seconds_movement', type=int,     default=5)
 parser.add_argument('--detection_zone'  , type=int,     default=5) #5 for face 11 for upper body >17 for whole body 
+parser.add_argument('--track_quality'   , type=int,     default=8)
+parser.add_argument('--contrast'        , type=int,     default=15)
+parser.add_argument('--n_frames'        , type=int,     default=19)
+parser.add_argument('--model'           , type=int,     default=101)
+parser.add_argument('--gamma'           , type=float,   default=2.0)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
-parser.add_argument('--file_name'       , default="data/Dabadaba/Cam_1/1_1.mp4")
+parser.add_argument('--input_file_name' , default="data/Dabadaba/Cam_1/1_1.mp4")
+parser.add_argument('--output_file_name', default="data/track_video/track.avi")
 args = parser.parse_args()
 
 def main():
@@ -53,19 +52,14 @@ def main():
         output_stride            = model_cfg['output_stride']
 
         if args.cam_or_file == 0:
-            cap                 = cv2.VideoCapture(args.file_name)
+            cap                 = cv2.VideoCapture(args.input_file_name)
         else:
             cap                 = cv2.VideoCapture(args.cam_id)
 
-        cap.set(4, args.cam_width)
-        cap.set(3, args.cam_height)
-
+        fourcc              = cv2.VideoWriter_fourcc(*'DIVX')
         height              = cap.get(4)
         width               = cap.get(3)
-        len_video           = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        fourcc              = cv2.VideoWriter_fourcc(*'XVID')
-        output_movie        = cv2.VideoWriter('data/track_video/pose_detection.avi', fourcc, 29.97, (args.cam_width, args.cam_height))
-
+        
         listofcenters       = []
         centers             = []
         max_displacement    = []
@@ -75,7 +69,7 @@ def main():
         cont                = 0
         rectangleColor      = (0,0,255)
         faceTrackers        = {}
-        height_fin          = (height*(8/10))
+        height_fin          = height*(8/10)
         width_int           = width/3
         height_min          = height*(2/7)
         height_int          = (height_min + height_fin)/2
@@ -86,12 +80,18 @@ def main():
         w_up                = [width_int,width_int*2,(width_int*3),width_int,(width_int*2),(width_int*3)]
         w_down              = [width_min,width_int,width_int*2,width_min,width_int,width_int*2]
 
+        out                 = cv2.VideoWriter(args.output_file_name, fourcc, 20.0, (int(width),int(math.ceil(height_fin-height_min))))
+        len_video           = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
         start = time.time()
         frame_count = 0
+        print("Nueva")
+
         while True:
-            if int(time.time()-start)> ((cont+1)*args.seconds_movement):
-                cont=print_move(cont,max_displacement,max_movement_single)
+            if int(time.time()-start)> (300):
+                exit()
+            #if int(time.time()-start)> ((cont+1)*args.seconds_movement):
+                #cont=print_move(cont,max_displacement,max_movement_single)
 
             if frame_count==len_video:
                 break
@@ -122,7 +122,7 @@ def main():
                 if trackingQuality < args.track_quality:
                     fidsToDelete.append(fid)
             for fid in fidsToDelete:
-                print("Removing fid " + str(fid) + " from list of trackers")
+                #print("Removing fid " + str(fid) + " from list of trackers")
                 faceTrackers.pop(fid,None)
             if (frame_number % args.n_frames) == 0:
                 heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': input_image})
@@ -346,7 +346,7 @@ def main():
                                         max_movement_single[fid]=distance
 
                         if ((matchedFid is None)):
-                            print("Creating new tracker " + str(currentFaceID))
+                            #print("Creating new tracker " + str(currentFaceID))
                             tracker = dlib.correlation_tracker()
                             tracker.start_track(overlay_image,dlib.rectangle(int(y_min), int(x_min), int(y_max) , int(x_max)))
                             faceTrackers[ currentFaceID ] = tracker
@@ -395,7 +395,7 @@ def main():
                         cv2.line(overlay_image,(x_1,y_1),(x_2,y_2),(0,0,255),1)
                     stop+=1
 
-            cv2.imshow('posenet', overlay_image)
+            #cv2.imshow('posenet', overlay_image)
             #cv2.imshow('posenet_face', overlay_image_face)
             #cv2.imshow('posenet_keypoints', overlay_image_keypoints)
             #cv2.imshow('posenet_skeleton', overlay_image_skeleton)
@@ -404,13 +404,14 @@ def main():
             #cv2.imshow('posenet_means', overlay_image_means)
             #cv2.imshow('posenet_chest', overlay_image_chest)
             #cv2.imshow('posenet_att', overlay_image_att)
+            out.write(overlay_image)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-        print('Average FPS: ', frame_count / (time.time() - start))
-        print('time: ', (time.time() - start))
-        cont=print_move(cont,max_displacement,max_movement_single)
+        #print('Average FPS: ', frame_count / (time.time() - start))
+        #print('time: ', (time.time() - start))
+        #cont=print_move(cont,max_displacement,max_movement_single)
 
 if __name__ == "__main__":
     main()
