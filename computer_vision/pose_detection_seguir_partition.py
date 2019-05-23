@@ -40,11 +40,34 @@ parser.add_argument('--n_frames'        , type=int,     default=19)
 parser.add_argument('--model'           , type=int,     default=101)
 parser.add_argument('--gamma'           , type=float,   default=2.0)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
-parser.add_argument('--input_file_name' , default="data/Dabadaba/Cam_1/1_1.mp4")
+parser.add_argument('--input_file_name' , default="a")
 parser.add_argument('--output_file_name', default="data/track_video/track.avi")
 args = parser.parse_args()
 
 def main():
+
+    if args.grid_size !=4 and args.grid_size !=2 and args.grid_size !=1:
+        print("The grid size must be either 1,2 or 4 for better results")
+        exit()
+    elif args.detection_zone!=5 and args.detection_zone!=11 and args.detection_zone!=17:
+        print("The detection zone must be either 5 (for face), 11 (for upper body) or 17 (for whole body)")
+        exit()
+    elif args.track_quality!=7 and args.track_quality!=8:
+        print("The tracking quality must be either 7 or 8 for better results")
+        exit()
+    elif args.contrast<5 or args.contrast>15:
+        print("The contrast must be between 5 and 15 for better results")
+        exit()
+    elif args.gamma<2.75 or args.gamma>5.0:
+        print("The gamma correction factor must be between 2.75 and 5.0 for better results")
+        exit()
+    elif args.cam_or_file !=0 and args.cam_or_file!=1:
+        print("Select the source of the video 0 for file and 1 for camera") 
+        exit()
+    elif args.cam_or_file ==0 or args.input_file_name!="a":
+        print("Introduce a file name")
+        exit()
+
 
     with tf.Session() as sess:
 
@@ -53,7 +76,7 @@ def main():
 
         if args.cam_or_file == 0:
             cap                 = cv2.VideoCapture(args.input_file_name)
-        else:
+        elif args.cam_or_file==1:
             cap                 = cv2.VideoCapture(args.cam_id)
 
         fourcc              = cv2.VideoWriter_fourcc(*'DIVX')
@@ -395,7 +418,7 @@ def main():
                         cv2.line(overlay_image,(x_1,y_1),(x_2,y_2),(0,0,255),1)
                     stop+=1
 
-            #cv2.imshow('posenet', overlay_image)
+            cv2.imshow('posenet', overlay_image)
             #cv2.imshow('posenet_face', overlay_image_face)
             #cv2.imshow('posenet_keypoints', overlay_image_keypoints)
             #cv2.imshow('posenet_skeleton', overlay_image_skeleton)
