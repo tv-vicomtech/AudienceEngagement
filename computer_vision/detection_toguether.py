@@ -179,7 +179,7 @@ def main():
                     vec=(zone_mac[0],int(zone_mac[1]))
                     mac_zones.append(vec)
                     values_zones.append(([],[]))
-
+                print(values_zones)
                 for mac in to_find:
                     zone            = "no_zone"
                     values_2b_find  = []
@@ -235,6 +235,8 @@ def main():
                     f_auto.write(str(mac)+': '+str(zona)+'\n')
 
                 f_auto.close()
+                g.close()
+                h.close()  
 
                 print('Average FPS: ', frame_count / (time.time() - start))
                 print('time: ', (time.time() - start))
@@ -337,22 +339,22 @@ def main():
 
                 for ii in range(0,len(keypoint_coords)-1): 
                     if Keypoints_eyes_coords[ii][0][0] == 0 and Keypoints_eyes_coords[ii][0][1] == 0 and Keypoints_eyes_coords[ii][1][0] == 0 and Keypoints_eyes_coords[ii][1][1] == 0:
-                        Keypoints_direction.append("no hay ojos") #rectoº
+                        Keypoints_direction.append("no hay ojos") #recto
                         continue
                     elif Keypoints_eyes_coords[ii][0][0] == 0 and Keypoints_eyes_coords[ii][0][1] == 0:
-                        Keypoints_direction.append("ojo izquierdo (Derecha)") #rectoº
+                        Keypoints_direction.append("ojo izquierdo (Derecha)") #recto
                         continue
                     elif Keypoints_eyes_coords[ii][1][0] == 0 and Keypoints_eyes_coords[ii][1][1] == 0:
-                        Keypoints_direction.append("ojo derecho (Izquierda)") #rectoº
+                        Keypoints_direction.append("ojo derecho (Izquierda)") #recto
                         continue
                     if Keypoints_face_coords[ii][0][1] == 0 and Keypoints_face_coords[ii][0][0] == 0 and Keypoints_half_eyes_coords[ii][0] == 0 and Keypoints_half_eyes_coords[ii][1] == 0:
-                        Keypoints_direction.append("fallo") #rectoº
+                        Keypoints_direction.append("fallo") #recto
                         continue
 
                     angle_2=math.atan2(Keypoints_face_coords[ii][0][1]-Keypoints_half_eyes_coords[ii][1], Keypoints_face_coords[ii][0][0]-Keypoints_half_eyes_coords[ii][0])
                     
                     if abs(angle_2) < 0.261799:
-                        Keypoints_direction.append("recto") #rectoº
+                        Keypoints_direction.append("recto") #recto
                     elif angle_2 > 0.261799:
                         Keypoints_direction.append("derecha") #derecha
                     elif angle_2 < -0.261799:
@@ -560,8 +562,7 @@ def main():
         print('time: ', (time.time() - start))
         cont=print_move(cont,max_displacement,max_movement_single)
 
-        g.close()
-        h.close()
+        
 
 if __name__ == "__main__":
     main()
