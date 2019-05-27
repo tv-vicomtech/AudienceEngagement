@@ -1,0 +1,896 @@
+18:65:90:76:a5:87 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 70
+20:d3:90:bc:cf:7e : raspberry2b 50  raspberry3b 46
+20:d3:90:bc:d1:78 : raspberry2b 40  raspberry3b 63
+20:df:b9:c1:dc:db : raspberry2b 83   
+58:e2:8f:60:20:e2 : raspberry2b 87   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+90:68:c3:43:ec:08 : raspberry2b 50  raspberry3b 64
+9c:e0:63:40:20:fc : raspberry2b 82   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4b:5c:49 : raspberry2b 47   
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d8:84:52 : raspberry2b 48   
+18:65:90:76:a5:87 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 70
+20:d3:90:bc:cf:7e : raspberry2b 50  raspberry3b 46
+20:d3:90:bc:d1:78 : raspberry2b 40  raspberry3b 63
+20:df:b9:c1:dc:db : raspberry2b 83   
+58:e2:8f:60:20:e2 : raspberry2b 87   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+90:68:c3:43:ec:08 : raspberry2b 50  raspberry3b 64
+9c:e0:63:40:20:fc : raspberry2b 82   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4b:5c:49 : raspberry2b 47   
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d8:84:52 : raspberry2b 48   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 67
+20:d3:90:bc:cf:7e : raspberry2b 50  raspberry3b 45
+20:d3:90:bc:d1:78 : raspberry2b 39  raspberry3b 64
+90:68:c3:43:ec:08 : raspberry2b 52  raspberry3b 63
+9c:e0:63:40:20:fc : raspberry2b 82   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:d8:84:52 : raspberry3b 58   
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+58:e2:8f:60:20:e2 : raspberry2b 87   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:5c:40:8c : raspberry2b 84   
+80:58:f8:9a:b6:ff : raspberry2b 83   
+a4:50:46:09:32:41 : raspberry2b 86   
+c0:ee:fb:5e:6b:1d : raspberry3b 84   
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:7b:3f:74 : raspberry3b 81   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 67
+20:d3:90:bc:cf:7e : raspberry2b 50  raspberry3b 45
+20:d3:90:bc:d1:78 : raspberry2b 39  raspberry3b 64
+90:68:c3:43:ec:08 : raspberry2b 52  raspberry3b 63
+9c:e0:63:40:20:fc : raspberry2b 82   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:d8:84:52 : raspberry3b 58   
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+58:e2:8f:60:20:e2 : raspberry2b 87   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:5c:40:8c : raspberry2b 84   
+80:58:f8:9a:b6:ff : raspberry2b 83   
+a4:50:46:09:32:41 : raspberry2b 86   
+c0:ee:fb:5e:6b:1d : raspberry3b 84   
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:7b:3f:74 : raspberry3b 81   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 66
+20:d3:90:bc:cf:7e : raspberry2b 61  raspberry3b 46
+20:d3:90:bc:d1:78 : raspberry2b 40  raspberry3b 64
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 68
+9c:e0:63:40:20:fc : raspberry2b 80   
+58:e2:8f:60:20:e2 : raspberry2b 85   
+a4:50:46:09:32:41 : raspberry2b 83  raspberry3b 90
+c0:ee:fb:5e:6b:1d : raspberry2b 78  raspberry3b 85
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+14:30:c6:bf:e4:a3 : raspberry2b 78  raspberry3b 84
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:5c:40:8c : raspberry2b 84   
+80:58:f8:9a:b6:ff : raspberry2b 83   
+80:be:05:5c:58:b1 : raspberry2b 79   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+b4:f1:da:dd:74:e8 : raspberry2b 86   
+d0:13:fd:3e:e5:0d : raspberry2b 82  raspberry3b 86
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:45:a4:dd : raspberry2b 81   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f8:c1:b7 : raspberry2b 78   
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 66
+20:d3:90:bc:cf:7e : raspberry2b 61  raspberry3b 46
+20:d3:90:bc:d1:78 : raspberry2b 40  raspberry3b 64
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 68
+9c:e0:63:40:20:fc : raspberry2b 80   
+58:e2:8f:60:20:e2 : raspberry2b 85   
+a4:50:46:09:32:41 : raspberry2b 83  raspberry3b 90
+c0:ee:fb:5e:6b:1d : raspberry2b 78  raspberry3b 85
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+14:30:c6:bf:e4:a3 : raspberry2b 78  raspberry3b 84
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:5c:40:8c : raspberry2b 84   
+80:58:f8:9a:b6:ff : raspberry2b 83   
+80:be:05:5c:58:b1 : raspberry2b 79   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+b4:f1:da:dd:74:e8 : raspberry2b 86   
+d0:13:fd:3e:e5:0d : raspberry2b 82  raspberry3b 86
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:45:a4:dd : raspberry2b 81   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f8:c1:b7 : raspberry2b 78   
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 71
+20:d3:90:bc:cf:7e : raspberry2b 53  raspberry3b 44
+20:d3:90:bc:d1:78 : raspberry2b 39  raspberry3b 66
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 67
+9c:e0:63:40:20:fc : raspberry2b 82   
+a4:50:46:09:32:41 : raspberry2b 84  raspberry3b 90
+c0:ee:fb:5e:6b:1d : raspberry2b 81  raspberry3b 90
+58:e2:8f:60:20:e2 : raspberry2b 85   
+80:be:05:5c:58:b1 : raspberry2b 80   
+d0:13:fd:3e:e5:0d : raspberry2b 62  raspberry3b 75
+da:a1:19:45:a4:dd : raspberry3b 84   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+da:a1:19:f8:c1:b7 : raspberry3b 86   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+14:30:c6:bf:e4:a3 : raspberry2b 78  raspberry3b 84
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+80:35:c1:34:bd:5b : raspberry2b 83   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:5c:40:8c : raspberry2b 84   
+80:58:f8:9a:b6:ff : raspberry2b 83   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+b4:f1:da:dd:74:e8 : raspberry2b 86   
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:11:86:6e : raspberry2b 79   
+da:a1:19:11:b9:d0 : raspberry2b 49  raspberry3b 55
+da:a1:19:11:d3:d3 : raspberry2b 82   
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:2f:32:1e : raspberry2b 55  raspberry3b 57
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:54:a0:31 : raspberry2b 83  raspberry3b 90
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:65:b4:3c : raspberry2b 85  raspberry3b 87
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:76:83:9f : raspberry2b 62  raspberry3b 70
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:95:e5:ce : raspberry2b 68  raspberry3b 77
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d4:53:15 : raspberry2b 83  raspberry3b 91
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:d9:67:c3 : raspberry2b 86   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:ec:32:76 : raspberry2b 78  raspberry3b 86
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f3:cb:63 : raspberry2b 64  raspberry3b 88
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+da:a1:19:fa:c5:d8 : raspberry2b 76  raspberry3b 87
+da:a1:19:ff:67:3c : raspberry2b 64  raspberry3b 78
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 71
+20:d3:90:bc:cf:7e : raspberry2b 53  raspberry3b 44
+20:d3:90:bc:d1:78 : raspberry2b 39  raspberry3b 66
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 67
+9c:e0:63:40:20:fc : raspberry2b 82   
+a4:50:46:09:32:41 : raspberry2b 84  raspberry3b 90
+c0:ee:fb:5e:6b:1d : raspberry2b 81  raspberry3b 90
+58:e2:8f:60:20:e2 : raspberry2b 85   
+80:be:05:5c:58:b1 : raspberry2b 80   
+d0:13:fd:3e:e5:0d : raspberry2b 62  raspberry3b 75
+da:a1:19:45:a4:dd : raspberry3b 84   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+da:a1:19:f8:c1:b7 : raspberry3b 86   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+14:30:c6:bf:e4:a3 : raspberry2b 78  raspberry3b 84
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+80:35:c1:34:bd:5b : raspberry2b 83   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:5c:40:8c : raspberry2b 84   
+80:58:f8:9a:b6:ff : raspberry2b 83   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+b4:f1:da:dd:74:e8 : raspberry2b 86   
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:11:86:6e : raspberry2b 79   
+da:a1:19:11:b9:d0 : raspberry2b 49  raspberry3b 55
+da:a1:19:11:d3:d3 : raspberry2b 82   
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:2f:32:1e : raspberry2b 55  raspberry3b 57
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:54:a0:31 : raspberry2b 83  raspberry3b 90
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:65:b4:3c : raspberry2b 85  raspberry3b 87
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:76:83:9f : raspberry2b 62  raspberry3b 70
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:95:e5:ce : raspberry2b 68  raspberry3b 77
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d4:53:15 : raspberry2b 83  raspberry3b 91
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:d9:67:c3 : raspberry2b 86   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:ec:32:76 : raspberry2b 78  raspberry3b 86
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f3:cb:63 : raspberry2b 64  raspberry3b 88
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+da:a1:19:fa:c5:d8 : raspberry2b 76  raspberry3b 87
+da:a1:19:ff:67:3c : raspberry2b 64  raspberry3b 78
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 72
+20:d3:90:bc:cf:7e : raspberry2b 51  raspberry3b 41
+20:d3:90:bc:d1:78 : raspberry2b 39  raspberry3b 66
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 64
+9c:e0:63:40:20:fc : raspberry2b 81   
+a4:50:46:09:32:41 : raspberry2b 85  raspberry3b 93
+c0:ee:fb:5e:6b:1d : raspberry2b 81  raspberry3b 90
+58:e2:8f:60:20:e2 : raspberry2b 85   
+80:58:f8:5c:40:8c : raspberry2b 85   
+80:be:05:5c:58:b1 : raspberry2b 80   
+b4:f1:da:dd:74:e8 : raspberry2b 84   
+d0:13:fd:3e:e5:0d : raspberry2b 62  raspberry3b 75
+da:a1:19:45:a4:dd : raspberry3b 84   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+da:a1:19:f8:c1:b7 : raspberry3b 86   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+14:30:c6:bf:e4:a3 : raspberry2b 78  raspberry3b 84
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+48:2c:a0:67:5f:37 : raspberry2b 84   
+80:35:c1:34:bd:5b : raspberry2b 83   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:9a:b6:ff : raspberry2b 83   
+88:b4:a6:25:d5:9a : raspberry2b 89   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+c4:93:d9:7e:3e:f0 : raspberry2b 84   
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+d4:e6:b7:cb:41:a7 : raspberry2b 58  raspberry3b 59
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:05:df:e4 : raspberry2b 64  raspberry3b 77
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:11:86:6e : raspberry2b 79   
+da:a1:19:11:b9:d0 : raspberry2b 49  raspberry3b 55
+da:a1:19:11:d3:d3 : raspberry2b 82   
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1b:86:72 : raspberry2b 60  raspberry3b 71
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:2f:32:1e : raspberry2b 55  raspberry3b 57
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:43:26:84 : raspberry2b 65  raspberry3b 77
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:54:a0:31 : raspberry2b 83  raspberry3b 90
+da:a1:19:57:6f:25 : raspberry2b 52  raspberry3b 61
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:5b:83:dd : raspberry2b 50  raspberry3b 64
+da:a1:19:65:b4:3c : raspberry2b 85  raspberry3b 87
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:76:83:9f : raspberry2b 62  raspberry3b 70
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:81:a2:17 : raspberry2b 82   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:8d:98:09 : raspberry2b 88   
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:95:e5:ce : raspberry2b 68  raspberry3b 77
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a7:18:48 : raspberry3b 75   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:ab:f1:5f : raspberry2b 61  raspberry3b 71
+da:a1:19:b3:96:17 : raspberry2b 49  raspberry3b 56
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c5:f8:ec : raspberry2b 59  raspberry3b 74
+da:a1:19:c6:ce:d7 : raspberry2b 65  raspberry3b 79
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:c7:71:db : raspberry2b 61  raspberry3b 72
+da:a1:19:cb:65:dc : raspberry2b 67  raspberry3b 80
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d4:53:15 : raspberry2b 83  raspberry3b 91
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:d9:67:c3 : raspberry2b 86   
+da:a1:19:da:ce:87 : raspberry2b 59   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e5:89:01 : raspberry2b 58   
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:ec:32:76 : raspberry2b 78  raspberry3b 86
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f1:29:35 : raspberry2b 62  raspberry3b 79
+da:a1:19:f2:52:56 : raspberry2b 51  raspberry3b 57
+da:a1:19:f3:cb:63 : raspberry2b 64  raspberry3b 88
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+da:a1:19:fa:c5:d8 : raspberry2b 76  raspberry3b 87
+da:a1:19:ff:67:3c : raspberry2b 64  raspberry3b 78
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 72
+20:d3:90:bc:cf:7e : raspberry2b 51  raspberry3b 41
+20:d3:90:bc:d1:78 : raspberry2b 39  raspberry3b 66
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 64
+9c:e0:63:40:20:fc : raspberry2b 81   
+a4:50:46:09:32:41 : raspberry2b 85  raspberry3b 93
+c0:ee:fb:5e:6b:1d : raspberry2b 81  raspberry3b 90
+58:e2:8f:60:20:e2 : raspberry2b 85   
+80:58:f8:5c:40:8c : raspberry2b 85   
+80:be:05:5c:58:b1 : raspberry2b 80   
+b4:f1:da:dd:74:e8 : raspberry2b 84   
+d0:13:fd:3e:e5:0d : raspberry2b 62  raspberry3b 75
+da:a1:19:45:a4:dd : raspberry3b 84   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+da:a1:19:f8:c1:b7 : raspberry3b 86   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+14:30:c6:bf:e4:a3 : raspberry2b 78  raspberry3b 84
+18:65:90:76:a5:87 : raspberry2b 85   
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+48:2c:a0:67:5f:37 : raspberry2b 84   
+80:35:c1:34:bd:5b : raspberry2b 83   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:9a:b6:ff : raspberry2b 83   
+88:b4:a6:25:d5:9a : raspberry2b 89   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+c4:93:d9:7e:3e:f0 : raspberry2b 84   
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+d4:e6:b7:cb:41:a7 : raspberry2b 58  raspberry3b 59
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:05:df:e4 : raspberry2b 64  raspberry3b 77
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:11:86:6e : raspberry2b 79   
+da:a1:19:11:b9:d0 : raspberry2b 49  raspberry3b 55
+da:a1:19:11:d3:d3 : raspberry2b 82   
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1b:86:72 : raspberry2b 60  raspberry3b 71
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:2f:32:1e : raspberry2b 55  raspberry3b 57
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:43:26:84 : raspberry2b 65  raspberry3b 77
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:54:a0:31 : raspberry2b 83  raspberry3b 90
+da:a1:19:57:6f:25 : raspberry2b 52  raspberry3b 61
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:5b:83:dd : raspberry2b 50  raspberry3b 64
+da:a1:19:65:b4:3c : raspberry2b 85  raspberry3b 87
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:76:83:9f : raspberry2b 62  raspberry3b 70
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:81:a2:17 : raspberry2b 82   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:8d:98:09 : raspberry2b 88   
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:95:e5:ce : raspberry2b 68  raspberry3b 77
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a7:18:48 : raspberry3b 75   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:ab:f1:5f : raspberry2b 61  raspberry3b 71
+da:a1:19:b3:96:17 : raspberry2b 49  raspberry3b 56
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c5:f8:ec : raspberry2b 59  raspberry3b 74
+da:a1:19:c6:ce:d7 : raspberry2b 65  raspberry3b 79
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:c7:71:db : raspberry2b 61  raspberry3b 72
+da:a1:19:cb:65:dc : raspberry2b 67  raspberry3b 80
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d4:53:15 : raspberry2b 83  raspberry3b 91
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:d9:67:c3 : raspberry2b 86   
+da:a1:19:da:ce:87 : raspberry2b 59   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e5:89:01 : raspberry2b 58   
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:ec:32:76 : raspberry2b 78  raspberry3b 86
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f1:29:35 : raspberry2b 62  raspberry3b 79
+da:a1:19:f2:52:56 : raspberry2b 51  raspberry3b 57
+da:a1:19:f3:cb:63 : raspberry2b 64  raspberry3b 88
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+da:a1:19:fa:c5:d8 : raspberry2b 76  raspberry3b 87
+da:a1:19:ff:67:3c : raspberry2b 64  raspberry3b 78
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
+1c:87:2c:67:b5:98 : raspberry2b 47  raspberry3b 70
+20:d3:90:bc:cf:7e : raspberry2b 53  raspberry3b 43
+20:d3:90:bc:d1:78 : raspberry2b 40  raspberry3b 65
+90:68:c3:43:ec:08 : raspberry2b 51  raspberry3b 66
+9c:e0:63:40:20:fc : raspberry2b 81   
+a4:50:46:09:32:41 : raspberry2b 85  raspberry3b 93
+58:e2:8f:60:20:e2 : raspberry2b 84   
+80:be:05:5c:58:b1 : raspberry2b 83   
+c0:ee:fb:5e:6b:1d : raspberry2b 81  raspberry3b 90
+14:30:c6:bf:e4:a3 : raspberry2b 80  raspberry3b 85
+20:a6:0c:1d:a0:57 : raspberry2b 85   
+80:35:c1:34:bd:5b : raspberry2b 79   
+80:58:f8:5c:40:8c : raspberry2b 85   
+b4:f1:da:dd:74:e8 : raspberry2b 84   
+c4:93:d9:7e:3e:f0 : raspberry2b 69  raspberry3b 87
+d0:13:fd:3e:e5:0d : raspberry2b 62  raspberry3b 75
+da:a1:19:45:a4:dd : raspberry3b 84   
+da:a1:19:4b:5c:49 : raspberry3b 56   
+da:a1:19:7b:3f:74 : raspberry2b 71   
+da:a1:19:d8:84:52 : raspberry3b 58   
+da:a1:19:f8:c1:b7 : raspberry3b 86   
+f0:43:47:3d:e8:9b : raspberry2b 68  raspberry3b 74
+18:65:90:76:a5:87 : raspberry2b 85   
+20:df:b9:c1:dc:db : raspberry2b 83   
+38:30:f9:21:e7:19 : raspberry2b 81   
+48:2c:a0:67:5f:37 : raspberry2b 84   
+80:58:f8:39:77:29 : raspberry2b 79  raspberry3b 85
+80:58:f8:9a:b6:ff : raspberry2b 83   
+88:b4:a6:25:d5:9a : raspberry2b 89   
+88:b4:a6:2e:28:7d : raspberry2b 77   
+88:b4:a6:35:f6:e0 : raspberry2b 81   
+88:b4:a6:84:78:f3 : raspberry2b 84  raspberry3b 87
+88:b4:a6:86:8d:2c : raspberry2b 77   
+88:b4:a6:f3:6e:d6 : raspberry2b 76   
+d0:59:e4:4e:24:ca : raspberry2b 60  raspberry3b 73
+d4:e6:b7:b9:7e:07 : raspberry2b 53  raspberry3b 48
+d4:e6:b7:cb:41:a7 : raspberry2b 58  raspberry3b 59
+da:a1:19:00:7f:b2 : raspberry2b 83   
+da:a1:19:05:df:e4 : raspberry2b 64  raspberry3b 77
+da:a1:19:08:47:0a : raspberry2b 63  raspberry3b 74
+da:a1:19:0f:54:16 : raspberry2b 79   
+da:a1:19:11:86:6e : raspberry2b 79   
+da:a1:19:11:b9:d0 : raspberry2b 49  raspberry3b 55
+da:a1:19:11:d3:d3 : raspberry2b 82   
+da:a1:19:15:92:ea : raspberry2b 82   
+da:a1:19:1b:86:72 : raspberry2b 60  raspberry3b 71
+da:a1:19:1c:0b:2e : raspberry2b 60  raspberry3b 67
+da:a1:19:25:01:bc : raspberry2b 83   
+da:a1:19:25:6c:21 : raspberry2b 84   
+da:a1:19:26:a7:27 : raspberry2b 83   
+da:a1:19:26:ae:00 : raspberry2b 60  raspberry3b 74
+da:a1:19:28:11:f5 : raspberry2b 50  raspberry3b 59
+da:a1:19:2d:9b:63 : raspberry2b 84   
+da:a1:19:2f:32:1e : raspberry2b 55  raspberry3b 57
+da:a1:19:34:d0:49 : raspberry3b 69   
+da:a1:19:35:28:5b : raspberry2b 64  raspberry3b 85
+da:a1:19:36:62:be : raspberry2b 81   
+da:a1:19:38:84:75 : raspberry2b 47  raspberry3b 57
+da:a1:19:3c:da:90 : raspberry2b 65  raspberry3b 74
+da:a1:19:43:26:84 : raspberry2b 65  raspberry3b 77
+da:a1:19:45:97:22 : raspberry2b 89   
+da:a1:19:46:a3:98 : raspberry2b 76  raspberry3b 76
+da:a1:19:4a:b2:9b : raspberry2b 52  raspberry3b 58
+da:a1:19:4b:d1:ff : raspberry2b 81  raspberry3b 84
+da:a1:19:4c:ad:1a : raspberry2b 85   
+da:a1:19:50:05:3a : raspberry2b 51   
+da:a1:19:54:a0:31 : raspberry2b 83  raspberry3b 90
+da:a1:19:57:6f:25 : raspberry2b 52  raspberry3b 61
+da:a1:19:58:d6:08 : raspberry2b 60  raspberry3b 72
+da:a1:19:5b:83:dd : raspberry2b 50  raspberry3b 64
+da:a1:19:64:d9:8b : raspberry2b 82   
+da:a1:19:65:b4:3c : raspberry2b 85  raspberry3b 87
+da:a1:19:67:61:4c : raspberry2b 86   
+da:a1:19:69:ba:30 : raspberry2b 77   
+da:a1:19:69:d4:90 : raspberry2b 63  raspberry3b 72
+da:a1:19:69:e2:c4 : raspberry2b 83   
+da:a1:19:69:e5:c9 : raspberry2b 82   
+da:a1:19:71:27:05 : raspberry2b 83   
+da:a1:19:72:13:f3 : raspberry3b 82   
+da:a1:19:73:4e:ba : raspberry2b 81  raspberry3b 89
+da:a1:19:75:b0:bc : raspberry2b 79   
+da:a1:19:76:83:9f : raspberry2b 62  raspberry3b 70
+da:a1:19:7b:96:f9 : raspberry2b 82   
+da:a1:19:7b:a2:ca : raspberry2b 85   
+da:a1:19:7f:39:f4 : raspberry2b 69  raspberry3b 88
+da:a1:19:80:63:dd : raspberry2b 47  raspberry3b 57
+da:a1:19:81:a2:17 : raspberry2b 82   
+da:a1:19:82:2f:f8 : raspberry2b 60  raspberry3b 68
+da:a1:19:84:23:32 : raspberry2b 65  raspberry3b 75
+da:a1:19:8d:98:09 : raspberry2b 88   
+da:a1:19:90:4d:11 : raspberry2b 84   
+da:a1:19:90:4d:ed : raspberry2b 86   
+da:a1:19:91:6c:01 : raspberry2b 87   
+da:a1:19:91:78:6c : raspberry2b 82   
+da:a1:19:95:bf:a1 : raspberry2b 84   
+da:a1:19:95:e5:ce : raspberry2b 68  raspberry3b 77
+da:a1:19:98:32:11 : raspberry2b 63  raspberry3b 66
+da:a1:19:9d:73:ab : raspberry3b 59   
+da:a1:19:a1:9f:e0 : raspberry2b 50  raspberry3b 57
+da:a1:19:a4:d5:c0 : raspberry2b 89   
+da:a1:19:a6:0d:29 : raspberry2b 50  raspberry3b 57
+da:a1:19:a7:18:48 : raspberry3b 75   
+da:a1:19:a7:aa:55 : raspberry2b 65  raspberry3b 76
+da:a1:19:a8:d5:7d : raspberry2b 77  raspberry3b 86
+da:a1:19:ab:f1:5f : raspberry2b 61  raspberry3b 71
+da:a1:19:b3:96:17 : raspberry2b 49  raspberry3b 56
+da:a1:19:b7:3d:7e : raspberry2b 76   
+da:a1:19:bd:db:35 : raspberry2b 50  raspberry3b 57
+da:a1:19:c0:78:2d : raspberry2b 84   
+da:a1:19:c5:7b:e9 : raspberry2b 84   
+da:a1:19:c5:7d:04 : raspberry2b 48   
+da:a1:19:c5:f8:ec : raspberry2b 59  raspberry3b 74
+da:a1:19:c6:ce:d7 : raspberry2b 65  raspberry3b 79
+da:a1:19:c6:e6:1f : raspberry2b 60  raspberry3b 61
+da:a1:19:c7:71:db : raspberry2b 61  raspberry3b 72
+da:a1:19:cb:65:dc : raspberry2b 67  raspberry3b 80
+da:a1:19:cc:44:e1 : raspberry2b 62  raspberry3b 75
+da:a1:19:d4:53:15 : raspberry2b 83  raspberry3b 91
+da:a1:19:d5:08:fc : raspberry2b 85   
+da:a1:19:d9:3f:07 : raspberry2b 64  raspberry3b 80
+da:a1:19:d9:67:c3 : raspberry2b 86   
+da:a1:19:da:ce:87 : raspberry2b 59   
+da:a1:19:dc:61:1d : raspberry2b 85   
+da:a1:19:e3:12:a6 : raspberry2b 63  raspberry3b 75
+da:a1:19:e5:89:01 : raspberry2b 58   
+da:a1:19:e9:11:e3 : raspberry2b 63  raspberry3b 75
+da:a1:19:e9:4d:f9 : raspberry2b 62  raspberry3b 72
+da:a1:19:e9:61:79 : raspberry2b 56  raspberry3b 64
+da:a1:19:ec:32:76 : raspberry2b 78  raspberry3b 86
+da:a1:19:ec:eb:be : raspberry2b 83   
+da:a1:19:ee:20:4b : raspberry2b 63  raspberry3b 76
+da:a1:19:f0:f4:f0 : raspberry2b 69  raspberry3b 79
+da:a1:19:f1:29:35 : raspberry2b 62  raspberry3b 79
+da:a1:19:f2:52:56 : raspberry2b 51  raspberry3b 57
+da:a1:19:f3:cb:63 : raspberry2b 64  raspberry3b 88
+da:a1:19:fa:65:6c : raspberry2b 63  raspberry3b 72
+da:a1:19:fa:72:63 : raspberry2b 84   
+da:a1:19:fa:c5:d8 : raspberry2b 76  raspberry3b 87
+da:a1:19:ff:67:3c : raspberry2b 64  raspberry3b 78
+ec:10:7b:c9:f1:a9 : raspberry2b 85   
