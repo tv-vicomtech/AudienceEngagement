@@ -1,16 +1,18 @@
-import tensorflow as tf
+import os
 import cv2
 import time
-import argparse
 import dlib
 import glob
-import cvlib as cv
-import threading
 import time
-import os 
-import numpy as np
-import posenet
 import math
+import json
+import posenet
+import argparse
+import threading
+import cvlib as cv
+import numpy as np
+import tensorflow as tf
+
 
 def adjust_gamma(image, gamma=1.0):
     invGamma = 1.0 / gamma
@@ -35,16 +37,21 @@ parser.add_argument('--grid_size'       , type=int,     default=2)
 parser.add_argument('--seconds_movement', type=int,     default=5)
 parser.add_argument('--detection_zone'  , type=int,     default=5) #5 for face 11 for upper body >17 for whole body 
 parser.add_argument('--track_quality'   , type=int,     default=8)
-parser.add_argument('--contrast'        , type=int,     default=15)
 parser.add_argument('--n_frames'        , type=int,     default=19)
 parser.add_argument('--model'           , type=int,     default=101)
-parser.add_argument('--gamma'           , type=float,   default=2.0)
+parser.add_argument('--prueba'          , type=int,     default=0)
+parser.add_argument('--n_divisions'     , type=int,     default=6)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
+parser.add_argument('--gamma'           , default=[3.0,3.0,3.0,3.0,3.0,3.0])
+parser.add_argument('--contrast'        , default=[15,15,15,15,15,15])
 parser.add_argument('--input_file_name' , default="a")
 parser.add_argument('--output_file_name', default="data/track_video/track.avi")
 args = parser.parse_args()
 
 def main():
+
+    contrast_vector=np.array(json.loads(args.contrast))
+    gamma_vector=np.array(json.loads(args.gamma))
 
     if args.grid_size !=4 and args.grid_size !=2 and args.grid_size !=1:
         print("The grid size must be either 1,2 or 4 for better results")
@@ -55,19 +62,24 @@ def main():
     elif args.track_quality!=7 and args.track_quality!=8:
         print("The tracking quality must be either 7 or 8 for better results")
         exit()
-    elif args.contrast<5 or args.contrast>15:
+    elif np.mean(contrast_vector)<5 or np.mean(contrast_vector)>15:
         print("The contrast must be between 5 and 15 for better results")
         exit()
-    elif args.gamma<2.75 or args.gamma>5.0:
+    elif np.mean(gamma_vector)<2.75 or np.mean(gamma_vector)>5.0:
         print("The gamma correction factor must be between 2.75 and 5.0 for better results")
         exit()
     elif args.cam_or_file !=0 and args.cam_or_file!=1:
         print("Select the source of the video 0 for file and 1 for camera") 
         exit()
-    elif args.cam_or_file ==0 or args.input_file_name!="a":
+    elif args.cam_or_file ==0 and args.input_file_name=="a":
         print("Introduce a file name")
         exit()
-
+    elif args.n_divisions != 6 and args.n_divisions !=9:
+        print("number of division must be either 6 or 9",args.n_divisions)
+        exit() 
+    elif args.n_divisions !=len(contrast_vector) or args.n_divisions!=len(gamma_vector):
+        print("Number of divisions must be equal to length of gamma and contrast vectors")
+        exit()
 
     with tf.Session() as sess:
 
@@ -75,9 +87,9 @@ def main():
         output_stride            = model_cfg['output_stride']
 
         if args.cam_or_file == 0:
-            cap                 = cv2.VideoCapture(args.input_file_name)
+            cap = cv2.VideoCapture(args.input_file_name)
         elif args.cam_or_file==1:
-            cap                 = cv2.VideoCapture(args.cam_id)
+            cap = cv2.VideoCapture(args.cam_id)
 
         fourcc              = cv2.VideoWriter_fourcc(*'DIVX')
         height              = cap.get(4)
@@ -95,13 +107,19 @@ def main():
         height_fin          = height*(8/10)
         width_int           = width/3
         height_min          = height*(2/7)
-        height_int          = (height_min + height_fin)/2
+        
         width_min           = 0
-
-        h_up                = [height_int,height_int,height_int,height_fin,height_fin,height_fin]
-        h_down              = [height_min,height_min,height_min,height_int,height_int,height_int]
-        w_up                = [width_int,width_int*2,(width_int*3),width_int,(width_int*2),(width_int*3)]
-        w_down              = [width_min,width_int,width_int*2,width_min,width_int,width_int*2]
+        if args.n_divisions==6:
+            height_int          = (height_min + height_fin)/2
+            h_up                = [height_int,height_int,height_int,height_fin,height_fin,height_fin]
+            h_down              = [height_min,height_min,height_min,height_int,height_int,height_int]
+        elif args.n_divisions==9:
+            height_int          = (height_fin - height_min)/3
+            h_up                = [height_min + height_int, height_min + height_int, height_min + height_int, height_min + 2*height_int, height_min + 2*height_int, height_min + 2*height_int, height_fin, height_fin, height_fin]
+            h_down              = [height_min, height_min, height_min, height_min + height_int, height_min + height_int, height_min + height_int, height_min + 2*height_int, height_min + 2*height_int, height_min + 2*height_int]
+            
+        w_up                = [width_int,width_int*2,(width_int*3),width_int,(width_int*2),(width_int*3),width_int,(width_int*2),(width_int*3)]
+        w_down              = [width_min,width_int,width_int*2,width_min,width_int,width_int*2,width_min,width_int,width_int*2]
 
         out                 = cv2.VideoWriter(args.output_file_name, fourcc, 20.0, (int(width),int(math.ceil(height_fin-height_min))))
         len_video           = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -111,10 +129,12 @@ def main():
         print("Nueva")
 
         while True:
-            if int(time.time()-start)> (300):
+            if (int(time.time()-start)> (args.prueba)) and (args.prueba!=0):
                 exit()
-            #if int(time.time()-start)> ((cont+1)*args.seconds_movement):
-                #cont=print_move(cont,max_displacement,max_movement_single)
+            if int(time.time()-start)> ((cont+1)*args.seconds_movement):
+                print('Average FPS: ', frame_count / (time.time() - start))
+                print('time: ', (time.time() - start))
+                cont=print_move(cont,max_displacement,max_movement_single)
 
             if frame_count==len_video:
                 break
@@ -126,10 +146,10 @@ def main():
 
             for ii in range(0,len(h_up)):
                 img_1   = img[int(h_down[ii]):int(h_up[ii]),int(w_down[ii]):int(w_up[ii])]
-                img_1   = adjust_gamma(img_1, gamma=args.gamma) # input 
+                img_1   = adjust_gamma(img_1, gamma=gamma_vector[ii]) # input 
                 lab     = cv2.cvtColor(img_1, cv2.COLOR_BGR2LAB)
                 l, a, b = cv2.split(lab)
-                clahe   = cv2.createCLAHE(clipLimit=args.contrast, tileGridSize=(args.grid_size,args.grid_size))
+                clahe   = cv2.createCLAHE(clipLimit=contrast_vector[ii], tileGridSize=(args.grid_size,args.grid_size))
                 cl      = clahe.apply(l)
                 limg    = cv2.merge((cl,a,b))
 
@@ -139,7 +159,7 @@ def main():
             input_image, display_image, output_scale = posenet.process_input(img, scale_factor=args.scale_factor, output_stride=output_stride)
             frame_count += 1
             fidsToDelete = []
-
+            print("Number of people detected: ",len(faceTrackers))
             for fid in faceTrackers.keys():
                 trackingQuality = faceTrackers[fid].update(overlay_image)
                 if trackingQuality < args.track_quality:
@@ -427,14 +447,14 @@ def main():
             #cv2.imshow('posenet_means', overlay_image_means)
             #cv2.imshow('posenet_chest', overlay_image_chest)
             #cv2.imshow('posenet_att', overlay_image_att)
-            out.write(overlay_image)
+            #out.write(overlay_image)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-        #print('Average FPS: ', frame_count / (time.time() - start))
-        #print('time: ', (time.time() - start))
-        #cont=print_move(cont,max_displacement,max_movement_single)
+        print('Average FPS: ', frame_count / (time.time() - start))
+        print('time: ', (time.time() - start))
+        cont=print_move(cont,max_displacement,max_movement_single)
 
 if __name__ == "__main__":
     main()
