@@ -42,6 +42,9 @@ parser.add_argument('--n_frames'        , type=int,     default=19)
 parser.add_argument('--model'           , type=int,     default=101)
 parser.add_argument('--prueba'          , type=int,     default=0)
 parser.add_argument('--n_divisions'     , type=int,     default=6)
+parser.add_argument('--show_image'      , type=int,     default=0)
+parser.add_argument('--store_image'     , type=int,     default=0)
+parser.add_argument('--part_shown'      , type=int,     default=0)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
 parser.add_argument('--gamma'           , default=[3.0,3.0,3.0,3.0,3.0,3.0])
 parser.add_argument('--contrast'        , default=[15,15,15,15,15,15])
@@ -82,6 +85,15 @@ def main():
         exit() 
     elif args.n_divisions !=len(contrast_vector) or args.n_divisions!=len(gamma_vector):
         print("Number of divisions must be equal to length of gamma and contrast vectors")
+        exit()
+    elif args.show_image !=0 and args.show_image!=1:
+        print("Introduce 0 to not show the image and 1 to show it")
+        exit()
+    elif args.store_image !=0 and args.store_image!=1:
+        print("Introduce 0 to not store the image and 1 to store it")
+        exit()
+    elif args.part_shown<0 or args.part_shown>8:
+        print("The part shown number must be between 0 and 8")
         exit()
 
     with tf.Session() as sess:
@@ -467,7 +479,8 @@ def main():
                 Keypoints_att_show_coords   = np.asarray(Keypoints_att_show_coords)
                 Keypoints_att_show_scores   = np.asarray(Keypoints_att_show_scores)
 
-                overlay_image               = posenet.draw_skel_and_kp( display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
+
+                overlay_image               = posenet.draw_skel_and_kp(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
                 overlay_image_keypoints     = posenet.draw_keypoints(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.15)
                 overlay_image_face          = posenet.draw_face(display_image, pose_scores, Keypoints_face_scores, Keypoints_face_coords, min_pose_score=0.15, min_part_score=0.15)
                 overlay_image_right_arm     = posenet.draw_arm_right(display_image, pose_scores, Keypoints_right_arm_scores, Keypoints_right_arm_coords,min_pose_score=0.15, min_part_score=0.15)
@@ -548,8 +561,25 @@ def main():
                     max_displacement[fid]+=distance
                     if distance > max_movement_single[fid]:
                         max_movement_single[fid]=distance
-                cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
-                cv2.circle(overlay_image, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                if args.show_image==1 or args.store_image==1:
+                    if args.part_shown==0:
+                        cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    elif args.part_shown==1:
+                        cv2.rectangle(overlay_image_face, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image_face, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    elif args.part_shown==2:
+                        cv2.rectangle(overlay_image_keypoints, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image_keypoints, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    elif args.part_shown==3:
+                        cv2.rectangle(overlay_image_skeleton, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image_skeleton, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    elif args.part_shown==6:
+                        cv2.rectangle(overlay_image_means, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image_means, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    elif args.part_shown==8:
+                        cv2.rectangle(overlay_image_att, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image_att, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
 
                 for ii in range(0,len(zones)):
                     (h_down_zones,h_up_zones,w_down_zones,w_up_zones) = zones[ii]
@@ -579,16 +609,45 @@ def main():
                         cv2.line(overlay_image,(x_1,y_1),(x_2,y_2),(0,0,255),1)
                     stop+=1
 
-            #cv2.imshow('posenet', overlay_image)
-            #cv2.imshow('posenet_face', overlay_image_face)
-            #cv2.imshow('posenet_keypoints', overlay_image_keypoints)
-            #cv2.imshow('posenet_skeleton', overlay_image_skeleton)
-            #cv2.imshow('posenet_right_arm', overlay_image_right_arm)
-            #cv2.imshow('posenet_left_arm', overlay_image_left_arm)
-            #cv2.imshow('posenet_means', overlay_image_means)
-            #cv2.imshow('posenet_chest', overlay_image_chest)
-            #cv2.imshow('posenet_att', overlay_image_att)
-            #out.write(overlay_image)
+            if args.show_image==1:
+                if args.part_shown==0:
+                    cv2.imshow('posenet', overlay_image)
+                elif args.part_shown==1:
+                    cv2.imshow('posenet_face', overlay_image_face)
+                elif args.part_shown==2:
+                    cv2.imshow('posenet_keypoints', overlay_image_keypoints)
+                elif args.part_shown==3:
+                    cv2.imshow('posenet_skeleton', overlay_image_skeleton)
+                elif args.part_shown==4:
+                    cv2.imshow('posenet_right_arm', overlay_image_right_arm)
+                elif args.part_shown==5:
+                    cv2.imshow('posenet_left_arm', overlay_image_left_arm)
+                elif args.part_shown==6:
+                    cv2.imshow('posenet_means', overlay_image_means)
+                elif args.part_shown==7:
+                    cv2.imshow('posenet_chest', overlay_image_chest)
+                elif args.part_shown==8:
+                    cv2.imshow('posenet_att', overlay_image_att)
+
+            if args.store_image==1:
+                if args.part_shown==0:
+                    out.write(overlay_image)
+                elif args.part_shown==1:
+                    out.write(overlay_image_face)
+                elif args.part_shown==2:
+                    out.write(overlay_image_keypoints)
+                elif args.part_shown==3:
+                    out.write(overlay_image_skeleton)
+                elif args.part_shown==4:
+                    out.write(overlay_image_right_arm)
+                elif args.part_shown==5:
+                    out.write(overlay_image_means)
+                elif args.part_shown==6:
+                    out.write(overlay_image_means)
+                elif args.part_shown==7:
+                    out.write(overlay_image_chest)
+                elif args.part_shown==8:
+                    out.write(overlay_image_att)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
