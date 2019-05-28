@@ -53,8 +53,8 @@ args = parser.parse_args()
 
 def main():
 
-    contrast_vector=np.array(json.loads(args.contrast))
-    gamma_vector=np.array(json.loads(args.gamma))
+    contrast_vector = np.array(json.loads(args.contrast))
+    gamma_vector    = np.array(json.loads(args.gamma))
 
     if args.grid_size !=4 and args.grid_size !=2 and args.grid_size !=1:
         print("The grid size must be either 1,2 or 4 for better results")
@@ -112,44 +112,56 @@ def main():
         height_min          = height*(2/7)
         
         width_min           = 0
+
         if args.n_divisions==6:
             height_int          = (height_min + height_fin)/2
-            h_up                = [height_int,height_int,height_int,height_fin,height_fin,height_fin]
-            h_down              = [height_min,height_min,height_min,height_int,height_int,height_int]
+            h_up                = [int(height_int),int(height_int),int(height_int),int(height_fin),int(height_fin),int(height_fin)]
+            h_down              = [int(height_min),int(height_min),int(height_min),int(height_int),int(height_int),int(height_int)]
+
+            w_up                = [int(width_int),int(width_int*2),int(width_int*3),int(width_int),int(width_int*2),int(width_int*3)]
+            w_down              = [int(width_min),int(width_int),int(width_int*2),int(width_min),int(width_int),int(width_int*2)]
+
+            number_partition    = [0,0,0,0,0,0]
+            zones               = [(h_down[0],h_up[0],w_down[0],w_up[0]),(h_down[1],h_up[1],w_down[1],w_up[1]),(h_down[2],h_up[2],w_down[2],w_up[2]),(h_down[3],h_up[3],w_down[3],w_up[3]),(h_down[4],h_up[4],w_down[4],w_up[4]),(h_down[5],h_up[5],w_down[5],w_up[5])]
+
         elif args.n_divisions==9:
             height_int          = (height_fin - height_min)/3
-            h_up                = [height_min + height_int, height_min + height_int, height_min + height_int, height_min + 2*height_int, height_min + 2*height_int, height_min + 2*height_int, height_fin, height_fin, height_fin]
-            h_down              = [height_min, height_min, height_min, height_min + height_int, height_min + height_int, height_min + height_int, height_min + 2*height_int, height_min + 2*height_int, height_min + 2*height_int]
-            
-        w_up                = [width_int,width_int*2,(width_int*3),width_int,(width_int*2),(width_int*3),width_int,(width_int*2),(width_int*3)]
-        w_down              = [width_min,width_int,width_int*2,width_min,width_int,width_int*2,width_min,width_int,width_int*2]
+            h_up                = [int(height_min + height_int), int(height_min + height_int), int(height_min + height_int), int(height_min + 2*height_int), int(height_min + 2*height_int), int(height_min + 2*height_int), int(height_fin), int(height_fin), int(height_fin)]
+            h_down              = [int(height_min), int(height_min), int(height_min), int(height_min + height_int), int(height_min + height_int), int(height_min + height_int), int(height_min + 2*height_int), int(height_min + 2*height_int), int(height_min + 2*height_int)]
 
-        out                 = cv2.VideoWriter(args.output_file_name, fourcc, 20.0, (int(width),int(math.ceil(height_fin-height_min))))
-        len_video           = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+            w_up                = [int(width_int),int(width_int*2),int(width_int*3),int(width_int),int(width_int*2),int(width_int*3),int(width_int),int(width_int*2),int(width_int*3)]
+            w_down              = [int(width_min),int(width_int),int(width_int*2),int(width_min),int(width_int),int(width_int*2),int(width_min),int(width_int),int(width_int*2)]
 
-        start = time.time()
-        frame_count = 0
-        print("Nueva")
+            number_partition    = [0,0,0,0,0,0,0,0,0]
+            zones               = [(h_down[0],h_up[0],w_down[0],w_up[0]),(h_down[1],h_up[1],w_down[1],w_up[1]),(h_down[2],h_up[2],w_down[2],w_up[2]),(h_down[3],h_up[3],w_down[3],w_up[3]),(h_down[4],h_up[4],w_down[4],w_up[4]),(h_down[5],h_up[5],w_down[5],w_up[5]),(h_down[6],h_up[6],w_down[6],w_up[6]),(h_down[7],h_up[7],w_down[7],w_up[7]),(h_down[8],h_up[8],w_down[8],w_up[8])]
+
+        out                     = cv2.VideoWriter(args.output_file_name, fourcc, 20.0, (int(width),int(math.ceil(height_fin-height_min))))
+        len_video               = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+        start                   = time.time()
+        frame_count             = 0
 
         while True:
             if (int(time.time()-start)> (args.prueba)) and (args.prueba!=0):
                 exit()
             if int(time.time()-start)> ((cont+1)*args.seconds_movement):
-                g           = open(args.wifi_path + '/llocations_resume.txt', 'r')
-                h           = open(args.zone_wifi_path + '/devices_zones.txt', 'r')
+                g               = open(args.wifi_path + '/llocations_resume.txt', 'r')
+                h               = open(args.zone_wifi_path + '/devices_zones.txt', 'r')
 
                 to_find         = [] 
                 to_find_zones   = [] 
                 values          = []
                 zone            = "no_zone"
                 been            = 0
+                zone_number     = []
 
                 for line in g:
-                    macs=line[0:17]
-                    val_2b=line[32:34]
-                    val_3b=line[48:50]
+                    macs   = line[0:17]
+                    val_2b = line[32:34]
+                    val_3b = line[48:50]
                     if len(to_find)==0:
-                        to_find.append(macs)
+                        to_find.append(macs)        
+
                     else:
                         for find in to_find:
                             if macs==find:
@@ -164,9 +176,10 @@ def main():
                             been=0
 
                 for line in h:
-                    mc=line[0:17]
-                    zn=line[18:20]
+                    mc  = line[0:17]
+                    zn  = line[18:20]
                     to_find_zones.append((mc,zn))
+                    zone_number.append(0)
 
                 f_auto      = open('out_automatic.txt','w')
 
@@ -175,11 +188,12 @@ def main():
                 values_zones    = []
                 mac_zones       = []
                 cnt_5           = 0
+
                 for zone_mac in to_find_zones:
                     vec=(zone_mac[0],int(zone_mac[1]))
                     mac_zones.append(vec)
                     values_zones.append(([],[]))
-                print(values_zones)
+
                 for mac in to_find:
                     zone            = "no_zone"
                     values_2b_find  = []
@@ -191,6 +205,7 @@ def main():
                         values_2b   = []
                         values_3b   = []
                         cont_3      = 0
+
                         for comp_3 in mac_zones:
                             if comp_3[0]==comp_2[0]:
                                 if cont_3 < n_values:
@@ -215,7 +230,6 @@ def main():
                                 min_distance = 9999999
                                 cnt_4=0
                                 #print(vec_find)
-
                                
                                 for cmp_val in values_zones:
                                     #print(distance,min_distance)
@@ -226,11 +240,12 @@ def main():
                                     cnt_4+=1    
                                 if cnt_5==2:
                                     zones.append((mac,zone))
+                                    zone_number[zone]+=1
                                     cnt_5=0
                                 else:
                                     cnt_5+=1
 
-                print(zones,mac_zones)
+                print("The number of devices in each zone are:",zone_number)
                 for (mac,zona) in zones:
                     f_auto.write(str(mac)+': '+str(zona)+'\n')
 
@@ -240,7 +255,7 @@ def main():
 
                 print('Average FPS: ', frame_count / (time.time() - start))
                 print('time: ', (time.time() - start))
-                cont=print_move(cont,max_displacement,max_movement_single)
+                cont = print_move(cont,max_displacement,max_movement_single)
 
             if frame_count==len_video:
                 break
@@ -249,6 +264,8 @@ def main():
 
             if not res:
                 break
+
+            print(h_up)
 
             for ii in range(0,len(h_up)):
                 img_1   = img[int(h_down[ii]):int(h_up[ii]),int(w_down[ii]):int(w_up[ii])]
@@ -264,8 +281,15 @@ def main():
             img = img[int(height_min):int(height_fin),0:int(width)]
             input_image, display_image, output_scale = posenet.process_input(img, scale_factor=args.scale_factor, output_stride=output_stride)
             frame_count += 1
+            if args.n_divisions==6:
+                number_partition    = [0,0,0,0,0,0]
+            
+            elif args.n_divisions==9:
+                number_partition    = [0,0,0,0,0,0,0,0,0]
+            
             fidsToDelete = []
             print("Number of people detected: ",len(faceTrackers))
+
             for fid in faceTrackers.keys():
                 trackingQuality = faceTrackers[fid].update(overlay_image)
                 if trackingQuality < args.track_quality:
@@ -482,7 +506,7 @@ def main():
                             t_h= int(tracked_position.height())
                             t_x_bar= t_x + 0.5 * t_w
                             t_y_bar= t_y + 0.5 * t_h
-                            if ((t_y<=x_bar<=(t_y+t_h))and(t_x<=y_bar<=(t_x+t_w))and(x<=t_y_bar<=(x+w))and(y<=t_x_bar<=(y+h))):
+                            if ((t_y<=x_bar<=(t_y+t_h)) and (t_x<=y_bar<=(t_x+t_w)) and (x<=t_y_bar<=(x+w)) and (y<=t_x_bar<=(y+h))):
                                 matchedFid = fid
                                 centers=listofcenters[fid]
                                 centers=[(int(y_bar),int(x_bar))]+centers
@@ -507,6 +531,7 @@ def main():
                             max_movement_single.append(0)
 
             for fid in faceTrackers.keys():
+                
                 tracked_position =  faceTrackers[fid].get_position()
                 t_x = int(tracked_position.left())
                 t_y = int(tracked_position.top())
@@ -526,6 +551,16 @@ def main():
                 cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
                 cv2.circle(overlay_image, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
 
+                for ii in range(0,len(zones)):
+                    (h_down_zones,h_up_zones,w_down_zones,w_up_zones) = zones[ii]
+                    h_down_zones=int((h_down_zones - height_min))
+                    h_up_zones=int((h_up_zones -height_min))
+                    w_down_zones=int(w_down_zones)
+                    w_up_zones=int(w_up_zones)
+                    if ((w_down_zones<=t_x_bar<=w_up_zones) and (h_down_zones<=t_y_bar<=h_up_zones)):
+                        number_partition[ii]+=1
+
+            print("The number of people in each partition is: ",number_partition)
             # List to hold x values.
             for fid in faceTrackers.keys():
                 values=listofcenters[fid]
