@@ -184,7 +184,7 @@ def main():
                 f_auto      = open('out_automatic.txt','w')
 
                 n_values        = 10
-                zones           = []
+                zones_file           = []
                 values_zones    = []
                 mac_zones       = []
                 cnt_5           = 0
@@ -239,14 +239,14 @@ def main():
                                         zone=cnt_4
                                     cnt_4+=1    
                                 if cnt_5==2:
-                                    zones.append((mac,zone))
+                                    zones_file.append((mac,zone))
                                     zone_number[zone]+=1
                                     cnt_5=0
                                 else:
                                     cnt_5+=1
 
                 print("The number of devices in each zone are:",zone_number)
-                for (mac,zona) in zones:
+                for (mac,zona) in zones_file:
                     f_auto.write(str(mac)+': '+str(zona)+'\n')
 
                 f_auto.close()
