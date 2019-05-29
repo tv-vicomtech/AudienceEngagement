@@ -23,14 +23,14 @@ def adjust_gamma(image, gamma=1.0):
         for i in np.arange(0, 256)]).astype("uint8")
     return cv2.LUT(image, table)
 
-def print_move(cont,max_displacement,max_movement_single):
+def print_move(cont,max_displacement,max_movement_single,min_fid):
     cont+=1
     print("Total movement for the past {} seconds:".format(cont*5))
-    for item in max_displacement:
-        print(item)
+    for jj in range(min_fid, len(max_displacement)):
+        print(max_displacement[jj])
     print("Maximun movement for the past {} seconds:".format(cont*5))
-    for item_2 in max_movement_single:
-        print(item_2)
+    for jj in range(min_fid, len(max_movement_single)):
+        print(max_movement_single[jj])
     return cont
 
 parser = argparse.ArgumentParser()
@@ -46,11 +46,13 @@ parser.add_argument('--n_divisions'     , type=int,     default=6)
 parser.add_argument('--show_image'      , type=int,     default=0)
 parser.add_argument('--store_image'     , type=int,     default=0)
 parser.add_argument('--part_shown'      , type=int,     default=0)
+parser.add_argument('--new_data'        , type=int,     default=30)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
+parser.add_argument('--threshold_zones' , type=float,   default=0.9)
 parser.add_argument('--gamma'           , default=[3.0,3.0,3.0,3.0,3.0,3.0])
 parser.add_argument('--contrast'        , default=[15,15,15,15,15,15])
 parser.add_argument('--relation_zones'  , default=[1,1,2,2,3,3])
-parser.add_argument('--cam_id'          , default=0)
+parser.add_argument('--cam_id'          , default="rtsp://admin:admin1234@192.168.15.220:554/Streaming/channels/202")
 parser.add_argument('--input_file_name' , default="a")
 parser.add_argument('--output_file_name', default="data/track_video/track.avi")
 parser.add_argument('--wifi_path'       , default="wifi_data/")
@@ -129,6 +131,7 @@ def main():
         
         width_min           = 0
         zones_computer      = [0,0,0]
+        min_fid             = 0
 
         if args.n_divisions==6:
             height_int          = (height_min + height_fin)/2
@@ -157,6 +160,8 @@ def main():
 
         start                   = time.time()
         frame_count             = 0
+        zone_number             = []
+        cnt_6                   = 0
 
         while True:
             if (int(time.time()-start)> (args.prueba)) and (args.prueba!=0):
@@ -272,7 +277,7 @@ def main():
 
                 print('Average FPS: ', frame_count / (time.time() - start))
                 print('time: ', (time.time() - start))
-                cont = print_move(cont,max_displacement,max_movement_single)
+                cont = print_move(cont,max_displacement,max_movement_single,min_fid)
 
             if frame_count==len_video:
                 break
@@ -281,8 +286,6 @@ def main():
 
             if not res:
                 break
-
-            print(h_up)
 
             for ii in range(0,len(h_up)):
                 img_1   = img[int(h_down[ii]):int(h_up[ii]),int(w_down[ii]):int(w_up[ii])]
@@ -306,15 +309,21 @@ def main():
             
             fidsToDelete = []
             print("Number of people detected: ",len(faceTrackers))
-
+            cnt=0
             for fid in faceTrackers.keys():
+                cnt+=1
                 trackingQuality = faceTrackers[fid].update(overlay_image)
                 if trackingQuality < args.track_quality:
+                    del max_movement_single[cnt]
+                    del max_displacement[cnt]
                     fidsToDelete.append(fid)
             for fid in fidsToDelete:
                 #print("Removing fid " + str(fid) + " from list of trackers")
                 faceTrackers.pop(fid,None)
+
             if (frame_number % args.n_frames) == 0:
+                
+
                 heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': input_image})
                 pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0), displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
                 keypoint_coords *= output_scale
@@ -548,8 +557,16 @@ def main():
                             max_displacement.append(0)
                             max_movement_single.append(0)
 
+                cnt_6+=1
+                if cnt_6 == args.new_data:
+                    for fid in faceTrackers.keys():
+                        fidsToDelete.append(fid)
+                    for fid in fidsToDelete:
+                        faceTrackers.pop(fid,None)
+                        min_fid=fid
+                    cnt_6 = 0
+
             for fid in faceTrackers.keys():
-                
                 tracked_position =  faceTrackers[fid].get_position()
                 t_x = int(tracked_position.left())
                 t_y = int(tracked_position.top())
@@ -560,12 +577,13 @@ def main():
                 centers=listofcenters[fid]
                 centers=[(t_x_bar,t_y_bar)]+centers
                 listofcenters[fid]=centers
-                max_distance=max_displacement[fid]
+                max_distance=max_displacement[fid-min_fid]
+
                 for (x,y) in centers:
                     distance=abs((pow(x_bar,2)+pow(y_bar,2))-(pow(t_x_bar,2)+pow(t_y_bar,2)))
-                    max_displacement[fid]+=distance
-                    if distance > max_movement_single[fid]:
-                        max_movement_single[fid]=distance
+                    max_displacement[fid-min_fid]+=distance
+                    if distance > max_movement_single[fid-min_fid]:
+                        max_movement_single[fid-min_fid]=distance
                 if args.show_image==1 or args.store_image==1:
                     if args.part_shown==0:
                         cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
@@ -601,6 +619,14 @@ def main():
 
             print("The number of people in each partition is: ",number_partition)
             print("The number of people in each zon from the computer vision is :", zones_computer)
+
+            if zone_number!=[]:
+                for ll in range(0,len(zones_computer)):
+                    if (zones_computer[ll]<(args.threshold_zones*zone_number[ll])):
+                        #contrast_vector +=1
+                        #gamma_vector    +=0.25
+                        a=1
+
             # List to hold x values.
             for fid in faceTrackers.keys():
                 values=listofcenters[fid]
@@ -664,7 +690,7 @@ def main():
 
         print('Average FPS: ', frame_count / (time.time() - start))
         print('time: ', (time.time() - start))
-        cont=print_move(cont,max_displacement,max_movement_single)
+        cont=print_move(cont,max_displacement,max_movement_single,min_fid)
 
         
 
