@@ -6,12 +6,14 @@ import glob
 import time
 import math
 import json
+import string
 import posenet
 import argparse
 import threading
+
+
 import cvlib as cv
 import numpy as np
-from string import *
 import tensorflow as tf
 
 
@@ -33,7 +35,6 @@ def print_move(cont,max_displacement,max_movement_single):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cam_or_file'     , type=int,     default=0)
-parser.add_argument('--cam_id'          , type=int,     default=0)
 parser.add_argument('--grid_size'       , type=int,     default=2)
 parser.add_argument('--seconds_movement', type=int,     default=5)
 parser.add_argument('--detection_zone'  , type=int,     default=5) #5 for face 11 for upper body >17 for whole body 
@@ -48,14 +49,17 @@ parser.add_argument('--part_shown'      , type=int,     default=0)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
 parser.add_argument('--gamma'           , default=[3.0,3.0,3.0,3.0,3.0,3.0])
 parser.add_argument('--contrast'        , default=[15,15,15,15,15,15])
+parser.add_argument('--relation_zones'  , default=[1,1,2,2,3,3])
+parser.add_argument('--cam_id'          , default=0)
 parser.add_argument('--input_file_name' , default="a")
 parser.add_argument('--output_file_name', default="data/track_video/track.avi")
-parser.add_argument('--wifi_path'       , default="../wifi_server/prueba_0/prueba_0_1")
-parser.add_argument('--zone_wifi_path'  , default="../wifi_server")
+parser.add_argument('--wifi_path'       , default="wifi_data/")
+parser.add_argument('--zone_wifi_path'  , default="")
 args = parser.parse_args()
 
 def main():
 
+    relation_vector = np.array(json.loads(args.relation_zones))
     contrast_vector = np.array(json.loads(args.contrast))
     gamma_vector    = np.array(json.loads(args.gamma))
 
@@ -124,6 +128,7 @@ def main():
         height_min          = height*(2/7)
         
         width_min           = 0
+        zones_computer      = [0,0,0]
 
         if args.n_divisions==6:
             height_int          = (height_min + height_fin)/2
@@ -157,8 +162,8 @@ def main():
             if (int(time.time()-start)> (args.prueba)) and (args.prueba!=0):
                 exit()
             if int(time.time()-start)> ((cont+1)*args.seconds_movement):
-                g               = open(args.wifi_path + '/llocations_resume.txt', 'r')
-                h               = open(args.zone_wifi_path + '/devices_zones.txt', 'r')
+                g               = open(args.wifi_path + 'locations_resume.txt', 'r')
+                h               = open(args.zone_wifi_path + 'devices_zones.txt', 'r')
 
                 to_find         = [] 
                 to_find_zones   = [] 
@@ -590,7 +595,12 @@ def main():
                     if ((w_down_zones<=t_x_bar<=w_up_zones) and (h_down_zones<=t_y_bar<=h_up_zones)):
                         number_partition[ii]+=1
 
+                zones_computer=[0,0,0]
+                for jj in range(0,len(number_partition)):
+                    zones_computer[relation_vector[jj]-1]+=number_partition[jj]
+
             print("The number of people in each partition is: ",number_partition)
+            print("The number of people in each zon from the computer vision is :", zones_computer)
             # List to hold x values.
             for fid in faceTrackers.keys():
                 values=listofcenters[fid]
