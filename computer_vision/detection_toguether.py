@@ -34,24 +34,25 @@ def print_move(cont,max_displacement,max_movement_single,min_fid):
     return cont
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--cam_or_file'     , type=int,     default=0)
-parser.add_argument('--grid_size'       , type=int,     default=2)
+parser.add_argument('--cam_or_file'     , type=int,     default=1)
+parser.add_argument('--print_data'      , type=int,     default=1)
+parser.add_argument('--grid_size'       , type=int,     default=1)
 parser.add_argument('--seconds_movement', type=int,     default=5)
 parser.add_argument('--detection_zone'  , type=int,     default=5) #5 for face 11 for upper body >17 for whole body 
 parser.add_argument('--track_quality'   , type=int,     default=8)
 parser.add_argument('--n_frames'        , type=int,     default=19)
 parser.add_argument('--model'           , type=int,     default=101)
-parser.add_argument('--prueba'          , type=int,     default=0)
+parser.add_argument('--prueba'          , type=int,     default=300)
 parser.add_argument('--n_divisions'     , type=int,     default=6)
-parser.add_argument('--show_image'      , type=int,     default=0)
+parser.add_argument('--show_image'      , type=int,     default=1)
 parser.add_argument('--store_image'     , type=int,     default=0)
 parser.add_argument('--part_shown'      , type=int,     default=0)
 parser.add_argument('--new_data'        , type=int,     default=30)
 parser.add_argument('--scale_factor'    , type=float,   default=0.7125)
 parser.add_argument('--threshold_zones' , type=float,   default=0.9)
-parser.add_argument('--gamma'           , default=[3.0,3.0,3.0,3.0,3.0,3.0])
-parser.add_argument('--contrast'        , default=[15,15,15,15,15,15])
-parser.add_argument('--relation_zones'  , default=[1,1,2,2,3,3])
+parser.add_argument('--gamma'           , default="[2.75,2.75,2.75,2.75,2.75,2.75]")
+parser.add_argument('--contrast'        , default="[15,15,15,15,15,15]")
+parser.add_argument('--relation_zones'  , default="[1,1,2,2,3,3]")
 parser.add_argument('--cam_id'          , default="rtsp://admin:admin1234@192.168.15.220:554/Streaming/channels/202")
 parser.add_argument('--input_file_name' , default="a")
 parser.add_argument('--output_file_name', default="data/track_video/track.avi")
@@ -267,7 +268,9 @@ def main():
                                 else:
                                     cnt_5+=1
 
-                print("The number of devices in each zone are:",zone_number)
+                if args.print_data==1:
+                    print("The number of devices in each zone are:",zone_number)
+
                 for (mac,zona) in zones_file:
                     f_auto.write(str(mac)+': '+str(zona)+'\n')
 
@@ -275,9 +278,10 @@ def main():
                 g.close()
                 h.close()  
 
-                print('Average FPS: ', frame_count / (time.time() - start))
-                print('time: ', (time.time() - start))
-                cont = print_move(cont,max_displacement,max_movement_single,min_fid)
+                if args.print_data==1:
+                    print('Average FPS: ', frame_count / (time.time() - start))
+                    print('time: ', (time.time() - start))
+                    cont = print_move(cont,max_displacement,max_movement_single,min_fid)
 
             if frame_count==len_video:
                 break
@@ -308,7 +312,10 @@ def main():
                 number_partition    = [0,0,0,0,0,0,0,0,0]
             
             fidsToDelete = []
-            print("Number of people detected: ",len(faceTrackers))
+
+            if args.print_data==1:
+                    print("Number of people detected: ",len(faceTrackers))
+
             cnt=0
             for fid in faceTrackers.keys():
                 cnt+=1
@@ -617,8 +624,9 @@ def main():
                 for jj in range(0,len(number_partition)):
                     zones_computer[relation_vector[jj]-1]+=number_partition[jj]
 
-            print("The number of people in each partition is: ",number_partition)
-            print("The number of people in each zon from the computer vision is :", zones_computer)
+            if args.print_data==1:
+                print("The number of people in each partition is: ",number_partition)
+                print("The number of people in each zon from the computer vision is :", zones_computer)
 
             if zone_number!=[]:
                 for ll in range(0,len(zones_computer)):
