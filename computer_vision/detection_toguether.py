@@ -252,10 +252,8 @@ def main():
                                 vec_find = (np.mean(values_2b_find),np.mean(values_3b_find))
                                 min_distance = 9999999
                                 cnt_4=0
-                                #print(vec_find)
                                
                                 for cmp_val in values_zones:
-                                    #print(distance,min_distance)
                                     distance=math.sqrt(np.sum(pow(abs(np.subtract(cmp_val,vec_find)),2)))  
                                     if distance<min_distance:
                                         min_distance=distance
@@ -325,33 +323,31 @@ def main():
                     del max_displacement[cnt]
                     fidsToDelete.append(fid)
             for fid in fidsToDelete:
-                #print("Removing fid " + str(fid) + " from list of trackers")
                 faceTrackers.pop(fid,None)
 
             if (frame_number % args.n_frames) == 0:
-                
 
                 heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': input_image})
                 pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0), displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
                 keypoint_coords *= output_scale
 
-                Keypoints_face_coords           = []
-                Keypoints_face_scores           = []
-                Keypoints_right_arm_coords      = []
-                Keypoints_right_arm_scores      = []
-                Keypoints_left_arm_coords       = []
-                Keypoints_left_arm_scores       = []
-                Keypoints_chest_coords          = []
-                Keypoints_chest_scores          = []
+                Keypoints_direction             = []
                 Keypoints_eyes_coords           = []
                 Keypoints_eyes_scores           = []
-                Keypoints_half_eyes_coords      = []
-                Keypoints_half_eyes_scores      = []
+                Keypoints_face_coords           = []
+                Keypoints_face_scores           = []
                 Keypoints_angle_coords          = []
                 Keypoints_angle_scores          = []
-                Keypoints_direction             = []
+                Keypoints_chest_coords          = []
+                Keypoints_chest_scores          = []
                 Keypoints_att_show_coords       = []
                 Keypoints_att_show_scores       = []
+                Keypoints_left_arm_coords       = []
+                Keypoints_left_arm_scores       = []
+                Keypoints_right_arm_coords      = []
+                Keypoints_right_arm_scores      = []
+                Keypoints_half_eyes_coords      = []
+                Keypoints_half_eyes_scores      = []
 
                 a_right_arm                     = []
                 b_right_arm                     = []
@@ -500,7 +496,6 @@ def main():
                 Keypoints_att_show_coords   = np.asarray(Keypoints_att_show_coords)
                 Keypoints_att_show_scores   = np.asarray(Keypoints_att_show_scores)
 
-
                 overlay_image               = posenet.draw_skel_and_kp(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
                 overlay_image_keypoints     = posenet.draw_keypoints(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.15)
                 overlay_image_face          = posenet.draw_face(display_image, pose_scores, Keypoints_face_scores, Keypoints_face_coords, min_pose_score=0.15, min_part_score=0.15)
@@ -553,7 +548,6 @@ def main():
                                         max_movement_single[fid]=distance
 
                         if ((matchedFid is None)):
-                            #print("Creating new tracker " + str(currentFaceID))
                             tracker = dlib.correlation_tracker()
                             tracker.start_track(overlay_image,dlib.rectangle(int(y_min), int(x_min), int(y_max) , int(x_max)))
                             faceTrackers[ currentFaceID ] = tracker
@@ -635,7 +629,6 @@ def main():
                         #gamma_vector    +=0.25
                         a=1
 
-            # List to hold x values.
             for fid in faceTrackers.keys():
                 values=listofcenters[fid]
                 stop=0
@@ -644,7 +637,6 @@ def main():
                     y_1=int(values[stop][1])
                     x_2=int(values[stop+1][0])
                     y_2=int(values[stop+1][1])
-                    # Plot the number in the list and set the line thickness.
                     if stop<10:
                         cv2.line(overlay_image,(x_1,y_1),(x_2,y_2),(255,0,0),4)
                     elif stop < 40:
@@ -699,8 +691,6 @@ def main():
         print('Average FPS: ', frame_count / (time.time() - start))
         print('time: ', (time.time() - start))
         cont=print_move(cont,max_displacement,max_movement_single,min_fid)
-
-        
 
 if __name__ == "__main__":
     main()

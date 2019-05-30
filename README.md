@@ -108,6 +108,17 @@ In this case the metrics obtained are:
 
 ## Ussage
 
+### Server
+
+The server can be used with or without docker:
+
+#### With Docker
+
+To start the docker with the Find3 server this commands needs to be input:
+
+sudo docker start -p 1884:1883 -p 8005:8003 -v /home/$USER/FIND_DATA:/data -e MQTT_ADMIN=ADMIN -e MQTT_PASS=PASSWORD -e MQTT_SERVER='localhost:1883' -e MQTT_EXTERNAL=192.168.35.101 -e MQTT_PORT=1884 --name wifi -d -t schollz/find3
+
+#### Without Docker
 In order to use this part it needs to be installed in the server computer and in the scanner devices(Raspberry Pi), it is needed to be first run the server by going to 
 
 $ cd $GOPATH/src/github.com/user/wifi_server/server/ai
@@ -120,6 +131,8 @@ $ go build -v
 $ ./main -port 8005 
 
 With this the server is up an running, the first group is not necesary but solves some errors. 
+
+###Scanner
 
 The scanner devices are used by the commands
 
@@ -142,6 +155,9 @@ This command allow the scanning and has different variables:
 9. bluetooth: this tag indicates that it need to monitor both wifi and bluettoth signals.
 
 ## Instalation
+
+### Scanner
+
 The scanner can be installed as:
 
 The instalation for this part needs Golang which can be download from [their web](https://golang.org/), go to the downloads folder and extract it to /usr/local, export the path as:
@@ -173,7 +189,21 @@ $ wifi_scan -i YOURINTERFACE -monitor-mode
 
 $ wifi_scan -i YOURINTERFACE -device YOURDEVICE -family YOURFAMILY -server http://IP:PORT -scantime 300 -forever -passive -no-modify &
 
-The server can be installed as:
+### Server
+
+The server can be installed with or without docker
+
+#### With Docker
+
+In this case the instalation lose the performance improvements and some of the changes, but gains in reliability and it is easier to use and install. First docker must be installed as:
+
+$ curl -sSL https://get.docker.com | sh
+
+The repository can be download as:
+
+$ docker pull schollz/find3
+
+#### Without docker
 
 Install the C compiler and the go compiler, go as before and C with:
 
