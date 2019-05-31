@@ -335,6 +335,215 @@ def zone_calculation(zones,t_x_bar,t_y_bar,number_partition,height_min,relation_
         zones_computer[relation_vector[jj]-1]+=number_partition[jj]
     return zones_computer,number_partition
 
+def face_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score,min_part_score):
+    Keypoints_face_coords           = []
+    Keypoints_face_scores           = []
+    Keypoints_eyes_coords           = []
+    Keypoints_eyes_scores           = []
+
+    for d in keypoint_coords:
+        Keypoints_face_coords.append(d[0:5])
+        Keypoints_eyes_coords.append(d[1:3])
+    for d in keypoint_scores:
+        Keypoints_face_scores.append(d[0:5])
+        Keypoints_eyes_scores.append(d[1:3])
+
+    Keypoints_face_scores       = np.asarray(Keypoints_face_scores)
+    Keypoints_face_coords       = np.asarray(Keypoints_face_coords)
+    
+    overlay_image = posenet.draw_face(display_image, pose_scores, Keypoints_face_scores, Keypoints_face_coords, min_pose_score=0.15, min_part_score=0.15)
+
+    return overlay_image
+
+def arms_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score,min_part_score):
+    Keypoints_left_arm_coords       = []
+    Keypoints_left_arm_scores       = []
+    Keypoints_right_arm_coords      = []
+    Keypoints_right_arm_scores      = []
+    a_right_arm                     = []
+    b_right_arm                     = []
+    a_left_arm                      = []
+    b_left_arm                      = []
+
+    for d in keypoint_coords:
+        a_right_arm.append(d[6])
+        a_right_arm.append(d[8])
+        a_right_arm.append(d[10])
+        a_left_arm.append(d[5])
+        a_left_arm.append(d[7])
+        a_left_arm.append(d[9])
+        Keypoints_left_arm_coords.append(np.asarray(a_left_arm))
+        Keypoints_right_arm_coords.append(np.asarray(a_right_arm))
+    
+    for d in keypoint_scores:
+        b_right_arm.append(d[6])
+        b_right_arm.append(d[8])
+        b_right_arm.append(d[10])
+        b_left_arm.append(d[5])
+        b_left_arm.append(d[7])
+        b_left_arm.append(d[9])
+        Keypoints_left_arm_scores.append(np.asarray(b_left_arm))
+        Keypoints_right_arm_scores.append(np.asarray(b_right_arm))
+
+    Keypoints_right_arm_coords  = np.asarray(Keypoints_right_arm_coords)
+    Keypoints_right_arm_scores  = np.asarray(Keypoints_right_arm_scores)
+    Keypoints_left_arm_coords   = np.asarray(Keypoints_left_arm_coords)
+    Keypoints_left_arm_scores   = np.asarray(Keypoints_left_arm_scores)
+    
+    overlay_image = posenet.draw_arm_right(display_image, pose_scores, Keypoints_right_arm_scores, Keypoints_right_arm_coords,min_pose_score=0.15, min_part_score=0.15)
+    overlay_image = posenet.draw_arm_left(overlay_image, pose_scores, Keypoints_left_arm_scores, Keypoints_left_arm_coords,min_pose_score=0.15, min_part_score=0.15)
+
+    return overlay_image
+
+def mean_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score,min_part_score):
+    Keypoints_eyes_coords           = []
+    Keypoints_eyes_scores           = []
+    Keypoints_face_coords           = []
+    Keypoints_face_scores           = []
+    total_means_coords              = []
+    total_means_scores              = []
+    means_prov_coords               = []
+    means_prov_scores               = []
+    mean_points_face_coords         = []
+    mean_points_face_scores         = []
+    #mean_points_chest_coords        = []
+    #mean_points_chest_scores        = []
+    #mean_points_right_arm_coords    = []
+    #mean_points_right_arm_scores    = []
+    #mean_points_left_arm_coords     = []
+    #mean_points_left_arm_scores     = []
+
+    for d in keypoint_coords:
+        Keypoints_face_coords.append(d[0:5])
+        Keypoints_eyes_coords.append(d[1:3])
+    for d in keypoint_scores:
+        Keypoints_face_scores.append(d[0:5])
+        Keypoints_eyes_scores.append(d[1:3])
+
+    for d in Keypoints_face_coords:
+        mean_points_face_coords.append(np.mean(d,axis=0))
+    for d in Keypoints_face_scores:
+        mean_points_face_scores.append(np.mean(d))
+
+    for ii,d in enumerate(pose_scores):
+        means_prov_coords.append(mean_points_face_coords[ii])
+        means_prov_scores.append(mean_points_face_scores[ii])
+        #means_prov_scores.append(mean_points_chest_scores[ii])
+        #means_prov_coords.append(mean_points_chest_coords[ii])
+        #means_prov_scores.append(mean_points_right_arm_scores[ii])
+        #means_prov_coords.append(mean_points_right_arm_coords[ii])
+        #means_prov_scores.append(mean_points_left_arm_scores[ii])
+        #means_prov_coords.append(mean_points_left_arm_coords[ii])
+        total_means_coords.append(np.asarray(means_prov_coords))
+        total_means_scores.append(np.asarray(means_prov_scores))
+
+    total_means_coords          = np.asarray(total_means_coords)
+    total_means_scores          = np.asarray(total_means_scores)
+
+    overlay_image = posenet.draw_means(display_image, pose_scores, total_means_scores,total_means_coords,min_pose_score=0.15, min_part_score=0.15)
+
+    return overlay_image
+
+def chest_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score,min_part_score):
+    Keypoints_chest_coords          = []
+    Keypoints_chest_scores          = []
+    a_chest                         = []
+    b_chest                         = []
+
+    for d in keypoint_coords:
+        a_chest.append(d[5])
+        a_chest.append(d[6])
+        a_chest.append(d[11])
+        a_chest.append(d[12])
+        Keypoints_chest_coords.append(np.asarray(a_chest))
+    
+    for d in keypoint_scores:
+        b_chest.append(d[5])
+        b_chest.append(d[6])
+        b_chest.append(d[11])
+        b_chest.append(d[12])
+        Keypoints_chest_scores.append(np.asarray(b_chest))
+
+    overlay_image = posenet.draw_chest(display_image, pose_scores, Keypoints_chest_scores, Keypoints_chest_coords, min_pose_score=0.15, min_part_score=0.15)
+
+    return overlay_image
+
+def att_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score,min_part_score):
+    Keypoints_direction             = []
+    Keypoints_eyes_coords           = []
+    Keypoints_eyes_scores           = []
+    Keypoints_face_coords           = []
+    Keypoints_face_scores           = []
+    Keypoints_angle_coords          = []
+    Keypoints_angle_scores          = []
+    Keypoints_att_show_coords       = []
+    Keypoints_att_show_scores       = []
+    Keypoints_half_eyes_coords      = []
+    Keypoints_half_eyes_scores      = []
+    a_att                           = []
+    b_att                           = []
+
+    angle_2                         = 0
+    angle                           = 0
+
+    for d in keypoint_coords:
+        Keypoints_face_coords.append(d[0:5])
+        Keypoints_eyes_coords.append(d[1:3])
+    for d in keypoint_scores:
+        Keypoints_face_scores.append(d[0:5])
+        Keypoints_eyes_scores.append(d[1:3])
+
+    for d in Keypoints_eyes_coords:
+        Keypoints_half_eyes_coords.append(np.mean(d,axis=0))
+        angle = math.atan2(d[1][1]-d[0][1], d[1][0]-d[0][0])
+        Keypoints_angle_coords.append(angle)
+    for d in Keypoints_eyes_scores:
+        Keypoints_half_eyes_scores.append(np.mean(d,axis=0))
+        Keypoints_angle_scores.append(np.mean(d,axis=0))
+
+    for ii in range(0,len(keypoint_coords)-1): 
+        if Keypoints_eyes_coords[ii][0][0] == 0 and Keypoints_eyes_coords[ii][0][1] == 0 and Keypoints_eyes_coords[ii][1][0] == 0 and Keypoints_eyes_coords[ii][1][1] == 0:
+            Keypoints_direction.append("no hay ojos") #recto
+            continue
+        elif Keypoints_eyes_coords[ii][0][0] == 0 and Keypoints_eyes_coords[ii][0][1] == 0:
+            Keypoints_direction.append("ojo izquierdo (Derecha)") #recto
+            continue
+        elif Keypoints_eyes_coords[ii][1][0] == 0 and Keypoints_eyes_coords[ii][1][1] == 0:
+            Keypoints_direction.append("ojo derecho (Izquierda)") #recto
+            continue
+        if Keypoints_face_coords[ii][0][1] == 0 and Keypoints_face_coords[ii][0][0] == 0 and Keypoints_half_eyes_coords[ii][0] == 0 and Keypoints_half_eyes_coords[ii][1] == 0:
+            Keypoints_direction.append("fallo") #recto
+            continue
+
+        angle_2=math.atan2(Keypoints_face_coords[ii][0][1]-Keypoints_half_eyes_coords[ii][1], Keypoints_face_coords[ii][0][0]-Keypoints_half_eyes_coords[ii][0])
+        
+        if abs(angle_2) < 0.261799:
+            Keypoints_direction.append("recto") #recto
+        elif angle_2 > 0.261799:
+            Keypoints_direction.append("derecha") #derecha
+        elif angle_2 < -0.261799:
+            Keypoints_direction.append("izquierda") #izq
+
+    for d in range(0,len(keypoint_coords)): 
+        a_att.append(Keypoints_face_coords[ii][1])
+        a_att.append(Keypoints_face_coords[ii][2])
+        a_att.append(Keypoints_face_coords[ii][0])
+        a_att.append(Keypoints_half_eyes_coords[ii])
+        Keypoints_att_show_coords.append(np.asarray(a_att))
+
+    for ii in range(0,len(keypoint_scores)): 
+        b_att.append(Keypoints_face_scores[ii][1])
+        b_att.append(Keypoints_face_scores[ii][2])
+        b_att.append(Keypoints_face_scores[ii][0])
+        b_att.append(Keypoints_half_eyes_scores[ii])
+        Keypoints_att_show_scores.append(np.asarray(b_att))
+
+    Keypoints_att_show_coords   = np.asarray(Keypoints_att_show_coords)
+    Keypoints_att_show_scores   = np.asarray(Keypoints_att_show_scores)
+    
+    overlay_image = posenet.draw_att(display_image, pose_scores, Keypoints_att_show_scores,Keypoints_att_show_coords,min_pose_score=0.15, min_part_score=0.15)
+
+    return overlay_image
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cam_or_file'     , type=int,     default=1)
@@ -348,6 +557,7 @@ parser.add_argument('--show_image'      , type=int,     default=1)
 parser.add_argument('--store_image'     , type=int,     default=0)
 parser.add_argument('--part_shown'      , type=int,     default=0)
 parser.add_argument('--show_movement'   , type=int,     default=1)
+parser.add_argument('--reset_movement'  , type=int,     default=0)
 parser.add_argument('--n_frames'        , type=int,     default=19)
 parser.add_argument('--new_data'        , type=int,     default=30)
 parser.add_argument('--model'           , type=int,     default=101)
@@ -446,8 +656,9 @@ def main():
                 cnt+=1
                 trackingQuality = faceTrackers[fid].update(overlay_image)
                 if trackingQuality < args.track_quality:
-                    del max_movement_single[cnt]
-                    del max_displacement[cnt]
+                    if args.reset_movement==1:
+                        del max_movement_single[cnt]
+                        del max_displacement[cnt]
                     fidsToDelete.append(fid)
 
             for fid in fidsToDelete:
@@ -465,22 +676,7 @@ def main():
                 
                 elif args.part_shown==1:
                     
-                    Keypoints_face_coords           = []
-                    Keypoints_face_scores           = []
-                    Keypoints_eyes_coords           = []
-                    Keypoints_eyes_scores           = []
-
-                    for d in keypoint_coords:
-                        Keypoints_face_coords.append(d[0:5])
-                        Keypoints_eyes_coords.append(d[1:3])
-                    for d in keypoint_scores:
-                        Keypoints_face_scores.append(d[0:5])
-                        Keypoints_eyes_scores.append(d[1:3])
-
-                    Keypoints_face_scores       = np.asarray(Keypoints_face_scores)
-                    Keypoints_face_coords       = np.asarray(Keypoints_face_coords)
-                    
-                    overlay_image = posenet.draw_face(display_image, pose_scores, Keypoints_face_scores, Keypoints_face_coords, min_pose_score=0.15, min_part_score=0.15)
+                    overlay_image = face_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
                 
                 elif args.part_shown==2:
 
@@ -492,189 +688,20 @@ def main():
 
                 elif args.part_shown==4:
 
-                    Keypoints_left_arm_coords       = []
-                    Keypoints_left_arm_scores       = []
-                    Keypoints_right_arm_coords      = []
-                    Keypoints_right_arm_scores      = []
-                    a_right_arm                     = []
-                    b_right_arm                     = []
-                    a_left_arm                      = []
-                    b_left_arm                      = []
-
-                    for d in keypoint_coords:
-                        a_right_arm.append(d[6])
-                        a_right_arm.append(d[8])
-                        a_right_arm.append(d[10])
-                        a_left_arm.append(d[5])
-                        a_left_arm.append(d[7])
-                        a_left_arm.append(d[9])
-                        Keypoints_left_arm_coords.append(np.asarray(a_left_arm))
-                        Keypoints_right_arm_coords.append(np.asarray(a_right_arm))
+                    overlay_image = arms_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
                     
-                    for d in keypoint_scores:
-                        b_right_arm.append(d[6])
-                        b_right_arm.append(d[8])
-                        b_right_arm.append(d[10])
-                        b_left_arm.append(d[5])
-                        b_left_arm.append(d[7])
-                        b_left_arm.append(d[9])
-                        Keypoints_left_arm_scores.append(np.asarray(b_left_arm))
-                        Keypoints_right_arm_scores.append(np.asarray(b_right_arm))
-
-                    Keypoints_right_arm_coords  = np.asarray(Keypoints_right_arm_coords)
-                    Keypoints_right_arm_scores  = np.asarray(Keypoints_right_arm_scores)
-                    Keypoints_left_arm_coords   = np.asarray(Keypoints_left_arm_coords)
-                    Keypoints_left_arm_scores   = np.asarray(Keypoints_left_arm_scores)
-                    
-                    overlay_image = posenet.draw_arm_right(display_image, pose_scores, Keypoints_right_arm_scores, Keypoints_right_arm_coords,min_pose_score=0.15, min_part_score=0.15)
-                    overlay_image = posenet.draw_arm_left(overlay_image, pose_scores, Keypoints_left_arm_scores, Keypoints_left_arm_coords,min_pose_score=0.15, min_part_score=0.15)
-                
                 elif args.part_shown==5:
 
-                    Keypoints_eyes_coords           = []
-                    Keypoints_eyes_scores           = []
-                    Keypoints_face_coords           = []
-                    Keypoints_face_scores           = []
-                    total_means_coords              = []
-                    total_means_scores              = []
-                    means_prov_coords               = []
-                    means_prov_scores               = []
-                    mean_points_face_coords         = []
-                    mean_points_face_scores         = []
-                    #mean_points_chest_coords        = []
-                    #mean_points_chest_scores        = []
-                    #mean_points_right_arm_coords    = []
-                    #mean_points_right_arm_scores    = []
-                    #mean_points_left_arm_coords     = []
-                    #mean_points_left_arm_scores     = []
+                    overlay_image = mean_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
 
-                    for d in keypoint_coords:
-                        Keypoints_face_coords.append(d[0:5])
-                        Keypoints_eyes_coords.append(d[1:3])
-                    for d in keypoint_scores:
-                        Keypoints_face_scores.append(d[0:5])
-                        Keypoints_eyes_scores.append(d[1:3])
-
-                    for d in Keypoints_face_coords:
-                        mean_points_face_coords.append(np.mean(d,axis=0))
-                    for d in Keypoints_face_scores:
-                        mean_points_face_scores.append(np.mean(d))
-
-                    for ii,d in enumerate(pose_scores):
-                        means_prov_coords.append(mean_points_face_coords[ii])
-                        means_prov_scores.append(mean_points_face_scores[ii])
-                        #means_prov_scores.append(mean_points_chest_scores[ii])
-                        #means_prov_coords.append(mean_points_chest_coords[ii])
-                        #means_prov_scores.append(mean_points_right_arm_scores[ii])
-                        #means_prov_coords.append(mean_points_right_arm_coords[ii])
-                        #means_prov_scores.append(mean_points_left_arm_scores[ii])
-                        #means_prov_coords.append(mean_points_left_arm_coords[ii])
-                        total_means_coords.append(np.asarray(means_prov_coords))
-                        total_means_scores.append(np.asarray(means_prov_scores))
-
-                    total_means_coords          = np.asarray(total_means_coords)
-                    total_means_scores          = np.asarray(total_means_scores)
-                    overlay_image = posenet.draw_means(display_image, pose_scores, total_means_scores,total_means_coords,min_pose_score=0.15, min_part_score=0.15)
-                
                 elif args.part_shown==6:
                     
-                    Keypoints_chest_coords          = []
-                    Keypoints_chest_scores          = []
-                    a_chest                         = []
-                    b_chest                         = []
+                    overlay_image = chest_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
 
-                    for d in keypoint_coords:
-                        a_chest.append(d[5])
-                        a_chest.append(d[6])
-                        a_chest.append(d[11])
-                        a_chest.append(d[12])
-                        Keypoints_chest_coords.append(np.asarray(a_chest))
-                    
-                    for d in keypoint_scores:
-                        b_chest.append(d[5])
-                        b_chest.append(d[6])
-                        b_chest.append(d[11])
-                        b_chest.append(d[12])
-                        Keypoints_chest_scores.append(np.asarray(b_chest))
-                
-                    overlay_image = posenet.draw_chest(display_image, pose_scores, Keypoints_chest_scores, Keypoints_chest_coords, min_pose_score=0.15, min_part_score=0.15)
-                
                 elif args.part_shown==7:
 
-                    Keypoints_direction             = []
-                    Keypoints_eyes_coords           = []
-                    Keypoints_eyes_scores           = []
-                    Keypoints_face_coords           = []
-                    Keypoints_face_scores           = []
-                    Keypoints_angle_coords          = []
-                    Keypoints_angle_scores          = []
-                    Keypoints_att_show_coords       = []
-                    Keypoints_att_show_scores       = []
-                    Keypoints_half_eyes_coords      = []
-                    Keypoints_half_eyes_scores      = []
-                    a_att                           = []
-                    b_att                           = []
+                    overlay_image = att_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
 
-                    angle_2                         = 0
-                    angle                           = 0
-
-                    for d in keypoint_coords:
-                        Keypoints_face_coords.append(d[0:5])
-                        Keypoints_eyes_coords.append(d[1:3])
-                    for d in keypoint_scores:
-                        Keypoints_face_scores.append(d[0:5])
-                        Keypoints_eyes_scores.append(d[1:3])
-
-                    for d in Keypoints_eyes_coords:
-                        Keypoints_half_eyes_coords.append(np.mean(d,axis=0))
-                        angle = math.atan2(d[1][1]-d[0][1], d[1][0]-d[0][0])
-                        Keypoints_angle_coords.append(angle)
-                    for d in Keypoints_eyes_scores:
-                        Keypoints_half_eyes_scores.append(np.mean(d,axis=0))
-                        Keypoints_angle_scores.append(np.mean(d,axis=0))
-
-                    for ii in range(0,len(keypoint_coords)-1): 
-                        if Keypoints_eyes_coords[ii][0][0] == 0 and Keypoints_eyes_coords[ii][0][1] == 0 and Keypoints_eyes_coords[ii][1][0] == 0 and Keypoints_eyes_coords[ii][1][1] == 0:
-                            Keypoints_direction.append("no hay ojos") #recto
-                            continue
-                        elif Keypoints_eyes_coords[ii][0][0] == 0 and Keypoints_eyes_coords[ii][0][1] == 0:
-                            Keypoints_direction.append("ojo izquierdo (Derecha)") #recto
-                            continue
-                        elif Keypoints_eyes_coords[ii][1][0] == 0 and Keypoints_eyes_coords[ii][1][1] == 0:
-                            Keypoints_direction.append("ojo derecho (Izquierda)") #recto
-                            continue
-                        if Keypoints_face_coords[ii][0][1] == 0 and Keypoints_face_coords[ii][0][0] == 0 and Keypoints_half_eyes_coords[ii][0] == 0 and Keypoints_half_eyes_coords[ii][1] == 0:
-                            Keypoints_direction.append("fallo") #recto
-                            continue
-
-                        angle_2=math.atan2(Keypoints_face_coords[ii][0][1]-Keypoints_half_eyes_coords[ii][1], Keypoints_face_coords[ii][0][0]-Keypoints_half_eyes_coords[ii][0])
-                        
-                        if abs(angle_2) < 0.261799:
-                            Keypoints_direction.append("recto") #recto
-                        elif angle_2 > 0.261799:
-                            Keypoints_direction.append("derecha") #derecha
-                        elif angle_2 < -0.261799:
-                            Keypoints_direction.append("izquierda") #izq
-
-                    for d in range(0,len(keypoint_coords)): 
-                        a_att.append(Keypoints_face_coords[ii][1])
-                        a_att.append(Keypoints_face_coords[ii][2])
-                        a_att.append(Keypoints_face_coords[ii][0])
-                        a_att.append(Keypoints_half_eyes_coords[ii])
-                        Keypoints_att_show_coords.append(np.asarray(a_att))
-
-                    for ii in range(0,len(keypoint_scores)): 
-                        b_att.append(Keypoints_face_scores[ii][1])
-                        b_att.append(Keypoints_face_scores[ii][2])
-                        b_att.append(Keypoints_face_scores[ii][0])
-                        b_att.append(Keypoints_half_eyes_scores[ii])
-                        Keypoints_att_show_scores.append(np.asarray(b_att))
-
-                    Keypoints_att_show_coords   = np.asarray(Keypoints_att_show_coords)
-                    Keypoints_att_show_scores   = np.asarray(Keypoints_att_show_scores)
-                    
-                    overlay_image = posenet.draw_att(display_image, pose_scores, Keypoints_att_show_scores,Keypoints_att_show_coords,min_pose_score=0.15, min_part_score=0.15)
-                
                 for idx,esq in enumerate(keypoint_coords):
                     x_coords = []
                     y_coords = []
@@ -747,13 +774,25 @@ def main():
                 centers=listofcenters[fid]
                 centers=[(t_x_bar,t_y_bar)]+centers
                 listofcenters[fid]=centers
-                max_distance=max_displacement[fid-min_fid]
+
+                if args.reset_movement==1:
+                    max_distance=max_displacement[fid-min_fid]
+                else:
+                    max_distance=max_displacement[fid]
 
                 for (x,y) in centers:
+
                     distance=abs((pow(x_bar,2)+pow(y_bar,2))-(pow(t_x_bar,2)+pow(t_y_bar,2)))
-                    max_displacement[fid-min_fid]+=distance
-                    if distance > max_movement_single[fid-min_fid]:
-                        max_movement_single[fid-min_fid]=distance
+                    
+                    if args.reset_movement==1:
+                        max_displacement[fid-min_fid]+=distance
+                        if distance > max_movement_single[fid-min_fid]:
+                            max_movement_single[fid-min_fid]=distance
+                    else:
+                        max_displacement[fid]+=distance
+                        if distance > max_movement_single[fid]:
+                            max_movement_single[fid]=distance
+
                 if args.show_image==1 or args.store_image==1:
                     cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
                     cv2.circle(overlay_image, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
@@ -767,8 +806,8 @@ def main():
             if zone_number!=[]:
                 for ll in range(0,len(zones_computer)):
                     if (zones_computer[ll]<(args.threshold_zones*zone_number[ll])):
-                        #contrast_vector +=1
-                        #gamma_vector    +=0.25
+                        #contrast_vector[ll] +=1
+                        #gamma_vector[ll]    +=0.25
                         a=1
             
             show_store_result(args,overlay_image,faceTrackers,listofcenters)
