@@ -558,8 +558,8 @@ parser.add_argument('--store_image'     , type=int,     default=0)
 parser.add_argument('--part_shown'      , type=int,     default=0)
 parser.add_argument('--show_movement'   , type=int,     default=1)
 parser.add_argument('--reset_movement'  , type=int,     default=0)
-parser.add_argument('--batch_length'    , type=int,     default=1)
-parser.add_argument('--n_frames'        , type=int,     default=19)
+parser.add_argument('--batch_length'    , type=int,     default=2)
+parser.add_argument('--n_frames'        , type=int,     default=10)
 parser.add_argument('--new_data'        , type=int,     default=30)
 parser.add_argument('--model'           , type=int,     default=101)
 parser.add_argument('--prueba'          , type=int,     default=300)
@@ -641,14 +641,15 @@ def main():
 
             cnt = 0
             my_batch = list()
-            cnt = cnt + 1
-            res, img = cap.read()
-            frame_count     += 1
-            if not res:
-                break
-            img = preprocessing(h_down,h_up,w_down,w_up,gamma_vector,img,contrast_vector,args,height_min,height_fin,width)
-            input_image, display_image, output_scale = posenet.process_input(img, scale_factor=args.scale_factor, output_stride=output_stride)
-
+            while (cnt < args.batch_length):
+                cnt = cnt + 1
+                res, img = cap.read()
+                frame_count     += 1
+                if not res:
+                    break
+                img = preprocessing(h_down,h_up,w_down,w_up,gamma_vector,img,contrast_vector,args,height_min,height_fin,width)
+                input_image, display_image, output_scale = posenet.process_input(img, scale_factor=args.scale_factor, output_stride=output_stride)
+                my_batch.append(img)
 
 
             if not res:
@@ -673,164 +674,173 @@ def main():
             for fid in fidsToDelete:
                 faceTrackers.pop(fid,None)
 
+            my_batch_expanded = np.asarray(my_batch)
+            print(my_batch_expanded.shape)
+            #my_batch_expanded.squeeze(axis=0)
             # test_2 = list([input_image, input_image])
             # test_3 = np.stack(test_2, axis=0)
             # print(input_image.shape,img.shape)
 
-            heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': input_image})
-            pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0), displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
-            keypoint_coords *= output_scale
 
-            if args.part_shown==0:
-
-                overlay_image = posenet.draw_skel_and_kp(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
+            print(my_batch_expanded.shape)
+            heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': my_batch_expanded})
             
-            elif args.part_shown==1:
+            for mm in range(0,args.batch_length):
+
+                pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result[1,:], offsets_result[1,:], displacement_fwd_result[1,:], displacement_bwd_result[1,:], output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
+                keypoint_coords *= output_scale
+
+                if args.part_shown==0:
+
+                    overlay_image = posenet.draw_skel_and_kp(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
                 
-                overlay_image = face_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
-            
-            elif args.part_shown==2:
-
-                overlay_image = posenet.draw_keypoints(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.15)
-
-            elif args.part_shown==3:
-                
-                overlay_image = posenet.draw_skeleton(display_image, pose_scores, keypoint_scores, keypoint_coords,min_pose_score=0.15, min_part_score=0.15)
-
-            elif args.part_shown==4:
-
-                overlay_image = arms_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
-                
-            elif args.part_shown==5:
-
-                overlay_image = mean_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
-
-            elif args.part_shown==6:
-                
-                overlay_image = chest_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
-
-            elif args.part_shown==7:
-
-                overlay_image = att_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
-
-            
-            if (frame_count % args.n_frames) == 0:
-
-                for idx,esq in enumerate(keypoint_coords):
-                    x_coords = []
-                    y_coords = []
-                    for ii in range(0,min(args.detection_zone,len(esq)-1)):
-                        if esq[ii][0]!=0 or esq[ii][1]!=0:
-                            x_coords.append(esq[ii][0])
-                            y_coords.append(esq[ii][1]) 
+                elif args.part_shown==1:
                     
-                    if len(x_coords)!=0:
-                        x_min = np.min(x_coords)-20
-                        y_min = np.min(y_coords)-20
-                        x_max = np.max(x_coords)+20
-                        y_max = np.max(y_coords)+20
-                        x= x_min
-                        y= y_min
-                        w= x_max - x_min
-                        h= y_max - y_min
-                        x_bar= x + 0.5 * w
-                        y_bar= y + 0.5 * h
-                        matchedFid = None
+                    overlay_image = face_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+                
+                elif args.part_shown==2:
+
+                    overlay_image = posenet.draw_keypoints(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.15)
+
+                elif args.part_shown==3:
                     
-                        for fid in faceTrackers.keys():
-                            tracked_position = faceTrackers[fid].get_position()
-                            t_x= int(tracked_position.left())
-                            t_y= int(tracked_position.top())
-                            t_w= int(tracked_position.width())
-                            t_h= int(tracked_position.height())
-                            t_x_bar= t_x + 0.5 * t_w
-                            t_y_bar= t_y + 0.5 * t_h
-                            if ((t_y<=x_bar<=(t_y+t_h)) and (t_x<=y_bar<=(t_x+t_w)) and (x<=t_y_bar<=(x+w)) and (y<=t_x_bar<=(y+h))):
-                                matchedFid = fid
-                                centers=listofcenters[fid]
+                    overlay_image = posenet.draw_skeleton(display_image, pose_scores, keypoint_scores, keypoint_coords,min_pose_score=0.15, min_part_score=0.15)
+
+                elif args.part_shown==4:
+
+                    overlay_image = arms_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+                    
+                elif args.part_shown==5:
+
+                    overlay_image = mean_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+
+                elif args.part_shown==6:
+                    
+                    overlay_image = chest_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+
+                elif args.part_shown==7:
+
+                    overlay_image = att_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+
+                
+                if ((frame_count-mm) % args.n_frames) == 0:
+
+                    for idx,esq in enumerate(keypoint_coords):
+                        x_coords = []
+                        y_coords = []
+                        for ii in range(0,min(args.detection_zone,len(esq)-1)):
+                            if esq[ii][0]!=0 or esq[ii][1]!=0:
+                                x_coords.append(esq[ii][0])
+                                y_coords.append(esq[ii][1]) 
+                        
+                        if len(x_coords)!=0:
+                            x_min = np.min(x_coords)-20
+                            y_min = np.min(y_coords)-20
+                            x_max = np.max(x_coords)+20
+                            y_max = np.max(y_coords)+20
+                            x= x_min
+                            y= y_min
+                            w= x_max - x_min
+                            h= y_max - y_min
+                            x_bar= x + 0.5 * w
+                            y_bar= y + 0.5 * h
+                            matchedFid = None
+                        
+                            for fid in faceTrackers.keys():
+                                tracked_position = faceTrackers[fid].get_position()
+                                t_x= int(tracked_position.left())
+                                t_y= int(tracked_position.top())
+                                t_w= int(tracked_position.width())
+                                t_h= int(tracked_position.height())
+                                t_x_bar= t_x + 0.5 * t_w
+                                t_y_bar= t_y + 0.5 * t_h
+                                if ((t_y<=x_bar<=(t_y+t_h)) and (t_x<=y_bar<=(t_x+t_w)) and (x<=t_y_bar<=(x+w)) and (y<=t_x_bar<=(y+h))):
+                                    matchedFid = fid
+                                    centers=listofcenters[fid]
+                                    centers=[(int(y_bar),int(x_bar))]+centers
+                                    listofcenters[fid]=centers
+                                    max_distance=max_displacement[fid]
+                                    for (x,y) in centers:
+                                        distance=abs((pow(x_bar,2)+pow(y_bar,2))-(pow(t_x_bar,2)+pow(t_y_bar,2)))
+                                        max_displacement[fid]+=distance
+                                        if distance > max_movement_single[fid]:
+                                            max_movement_single[fid]=distance
+
+                            if ((matchedFid is None)):
+                                tracker = dlib.correlation_tracker()
+                                tracker.start_track(overlay_image,dlib.rectangle(int(y_min), int(x_min), int(y_max) , int(x_max)))
+                                faceTrackers[ currentFaceID ] = tracker
+                                currentFaceID += 1
+                                centers=[]
                                 centers=[(int(y_bar),int(x_bar))]+centers
-                                listofcenters[fid]=centers
-                                max_distance=max_displacement[fid]
-                                for (x,y) in centers:
-                                    distance=abs((pow(x_bar,2)+pow(y_bar,2))-(pow(t_x_bar,2)+pow(t_y_bar,2)))
-                                    max_displacement[fid]+=distance
-                                    if distance > max_movement_single[fid]:
-                                        max_movement_single[fid]=distance
+                                listofcenters.append(centers)
+                                max_displacement.append(0)
+                                max_movement_single.append(0)
 
-                        if ((matchedFid is None)):
-                            tracker = dlib.correlation_tracker()
-                            tracker.start_track(overlay_image,dlib.rectangle(int(y_min), int(x_min), int(y_max) , int(x_max)))
-                            faceTrackers[ currentFaceID ] = tracker
-                            currentFaceID += 1
-                            centers=[]
-                            centers=[(int(y_bar),int(x_bar))]+centers
-                            listofcenters.append(centers)
-                            max_displacement.append(0)
-                            max_movement_single.append(0)
+                    cnt_6+=1
+                    if cnt_6 == args.new_data:
+                        for fid in faceTrackers.keys():
+                            fidsToDelete.append(fid)
+                        for fid in fidsToDelete:
+                            faceTrackers.pop(fid,None)
+                            min_fid=fid
+                        cnt_6 = 0
 
-                cnt_6+=1
-                if cnt_6 == args.new_data:
-                    for fid in faceTrackers.keys():
-                        fidsToDelete.append(fid)
-                    for fid in fidsToDelete:
-                        faceTrackers.pop(fid,None)
-                        min_fid=fid
-                    cnt_6 = 0
+                for fid in faceTrackers.keys():
+                    tracked_position =  faceTrackers[fid].get_position()
+                    t_x = int(tracked_position.left())
+                    t_y = int(tracked_position.top())
+                    t_w = int(tracked_position.width())
+                    t_h = int(tracked_position.height())
+                    t_x_bar = int(t_x + 0.5 * t_w)
+                    t_y_bar = int(t_y + 0.5 * t_h)
+                    centers=listofcenters[fid]
+                    centers=[(t_x_bar,t_y_bar)]+centers
+                    listofcenters[fid]=centers
 
-            for fid in faceTrackers.keys():
-                tracked_position =  faceTrackers[fid].get_position()
-                t_x = int(tracked_position.left())
-                t_y = int(tracked_position.top())
-                t_w = int(tracked_position.width())
-                t_h = int(tracked_position.height())
-                t_x_bar = int(t_x + 0.5 * t_w)
-                t_y_bar = int(t_y + 0.5 * t_h)
-                centers=listofcenters[fid]
-                centers=[(t_x_bar,t_y_bar)]+centers
-                listofcenters[fid]=centers
-
-                if args.reset_movement==1:
-                    max_distance=max_displacement[fid-min_fid]
-                else:
-                    max_distance=max_displacement[fid]
-
-                for (x,y) in centers:
-
-                    distance=abs((pow(x_bar,2)+pow(y_bar,2))-(pow(t_x_bar,2)+pow(t_y_bar,2)))
-                    
                     if args.reset_movement==1:
-                        max_displacement[fid-min_fid]+=distance
-                        if distance > max_movement_single[fid-min_fid]:
-                            max_movement_single[fid-min_fid]=distance
+                        max_distance=max_displacement[fid-min_fid]
                     else:
-                        max_displacement[fid]+=distance
-                        if distance > max_movement_single[fid]:
-                            max_movement_single[fid]=distance
+                        max_distance=max_displacement[fid]
 
-                if args.show_image==1 or args.store_image==1:
-                    cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
-                    cv2.circle(overlay_image, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    for (x,y) in centers:
+
+                        distance=abs((pow(x_bar,2)+pow(y_bar,2))-(pow(t_x_bar,2)+pow(t_y_bar,2)))
+                        
+                        if args.reset_movement==1:
+                            max_displacement[fid-min_fid]+=distance
+                            if distance > max_movement_single[fid-min_fid]:
+                                max_movement_single[fid-min_fid]=distance
+                        else:
+                            max_displacement[fid]+=distance
+                            if distance > max_movement_single[fid]:
+                                max_movement_single[fid]=distance
+
+                    if args.show_image==1 or args.store_image==1:
+                        cv2.rectangle(overlay_image, (int(t_x), int(t_y)),(int(t_x + t_w) ,int(t_y +t_h)), (0,255,0) ,2)
+                        cv2.circle(overlay_image, (int(t_x_bar), int(t_y_bar)),5, (0,255,0) ,2)
+                    
+                    zones_computer,number_partition = zone_calculation(zones,t_x_bar,t_y_bar,number_partition,height_min,relation_vector)
+
+                if args.print_data==1:
+                    print("The number of people in each partition is: ",number_partition)
+                    print("The number of people in each zon from the computer vision is :", zones_computer)
+
+                if zone_number!=[]:
+                    for ll in range(0,len(zones_computer)):
+                        if (zones_computer[ll]<(args.threshold_zones*zone_number[ll])):
+                            #contrast_vector[ll] +=1
+                            #gamma_vector[ll]    +=0.25
+                            a=1
                 
-                zones_computer,number_partition = zone_calculation(zones,t_x_bar,t_y_bar,number_partition,height_min,relation_vector)
+                show_store_result(args,overlay_image,faceTrackers,listofcenters)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    print('Average FPS: ', frame_count / (time.time() - start))
+                    print('time: ', (time.time() - start))
+                    cont=print_move(cont,max_displacement,max_movement_single,min_fid)
+                    exit()
 
-            if args.print_data==1:
-                print("The number of people in each partition is: ",number_partition)
-                print("The number of people in each zon from the computer vision is :", zones_computer)
-
-            if zone_number!=[]:
-                for ll in range(0,len(zones_computer)):
-                    if (zones_computer[ll]<(args.threshold_zones*zone_number[ll])):
-                        #contrast_vector[ll] +=1
-                        #gamma_vector[ll]    +=0.25
-                        a=1
             
-            show_store_result(args,overlay_image,faceTrackers,listofcenters)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-
-        print('Average FPS: ', frame_count / (time.time() - start))
-        print('time: ', (time.time() - start))
-        cont=print_move(cont,max_displacement,max_movement_single,min_fid)
 
 if __name__ == "__main__":
     main()
