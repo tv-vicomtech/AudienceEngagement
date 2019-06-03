@@ -664,43 +664,45 @@ def main():
             for fid in fidsToDelete:
                 faceTrackers.pop(fid,None)
 
-            if (frame_number % args.n_frames) == 0:
 
-                heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': input_image})
-                pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0), displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
-                keypoint_coords *= output_scale
+            heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = sess.run(model_outputs,feed_dict={'image:0': input_image})
+            pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0), displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
+            keypoint_coords *= output_scale
 
-                if args.part_shown==0:
+            if args.part_shown==0:
 
-                    overlay_image = posenet.draw_skel_and_kp(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
+                overlay_image = posenet.draw_skel_and_kp(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.1)                
+            
+            elif args.part_shown==1:
                 
-                elif args.part_shown==1:
-                    
-                    overlay_image = face_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+                overlay_image = face_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+            
+            elif args.part_shown==2:
+
+                overlay_image = posenet.draw_keypoints(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.15)
+
+            elif args.part_shown==3:
                 
-                elif args.part_shown==2:
+                overlay_image = posenet.draw_skeleton(display_image, pose_scores, keypoint_scores, keypoint_coords,min_pose_score=0.15, min_part_score=0.15)
 
-                    overlay_image = posenet.draw_keypoints(display_image, pose_scores, keypoint_scores, keypoint_coords, min_pose_score=0.15, min_part_score=0.15)
+            elif args.part_shown==4:
 
-                elif args.part_shown==3:
-                    
-                    overlay_image = posenet.draw_skeleton(display_image, pose_scores, keypoint_scores, keypoint_coords,min_pose_score=0.15, min_part_score=0.15)
+                overlay_image = arms_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+                
+            elif args.part_shown==5:
 
-                elif args.part_shown==4:
+                overlay_image = mean_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
 
-                    overlay_image = arms_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
-                    
-                elif args.part_shown==5:
+            elif args.part_shown==6:
+                
+                overlay_image = chest_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
 
-                    overlay_image = mean_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+            elif args.part_shown==7:
 
-                elif args.part_shown==6:
-                    
-                    overlay_image = chest_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+                overlay_image = att_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
 
-                elif args.part_shown==7:
-
-                    overlay_image = att_calculation(keypoint_coords,keypoint_scores,display_image, pose_scores,min_pose_score=0.15,min_part_score=0.1)
+            
+            if (frame_count % args.n_frames) == 0:
 
                 for idx,esq in enumerate(keypoint_coords):
                     x_coords = []
