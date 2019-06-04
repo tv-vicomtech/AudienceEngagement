@@ -65,14 +65,17 @@ def decode_multiple_poses(
     # perform part scoring step on GPU as it's expensive
     # TODO determine how much more of this would be worth performing on the GPU
     part_scores, part_idx = build_part_with_score_torch(score_threshold, LOCAL_MAXIMUM_RADIUS, scores)
-    part_scores = part_scores.cpu().numpy()
+    part_scores = part_scores.cpu()
+    part_scores.detach().numpy()
+    
     part_idx = part_idx.cpu().numpy()
 
     scores = scores.cpu().numpy()
     height = scores.shape[1]
     width = scores.shape[2]
     # change dimensions from (x, h, w) to (x//2, h, w, 2) to allow return of complete coord array
-    offsets = offsets.cpu().numpy().reshape(2, -1, height, width).transpose((1, 2, 3, 0))
+    offsets = offsets.cpu()
+    offsets.detach().numpy().reshape(2, -1, height, width).transpose((1, 2, 3, 0))
     displacements_fwd = displacements_fwd.cpu().numpy().reshape(2, -1, height, width).transpose((1, 2, 3, 0))
     displacements_bwd = displacements_bwd.cpu().numpy().reshape(2, -1, height, width).transpose((1, 2, 3, 0))
 
@@ -93,7 +96,7 @@ def decode_multiple_poses(
         keypoint_scores, keypoint_coords = decode_pose(
             root_score, root_id, root_image_coords,
             scores, offsets, output_stride,
-            displacements_fwd, displacements_bwd)
+            displacements_fwd.detach().numpy(), displacements_bwd.detach().numpy())
 
         pose_score = get_instance_score_fast(
             pose_keypoint_coords[:pose_count, :, :], squared_nms_radius, keypoint_scores, keypoint_coords)

@@ -19,7 +19,7 @@ def main():
     model = model.cuda()
     output_stride = model.output_stride
 
-    cap = cv2.VideoCapture("../../pueba/data/test_videos/dinner.mp4")
+    cap = cv2.VideoCapture("rtsp://admin:admin1234@192.168.15.220:554/Streaming/channels/402")
     cap.set(3, args.cam_width)
     cap.set(4, args.cam_height)
 

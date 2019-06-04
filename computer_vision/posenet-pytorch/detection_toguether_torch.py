@@ -570,9 +570,9 @@ parser.add_argument('--contrast'        , default="[15,15,15,15,15,15]")
 parser.add_argument('--relation_zones'  , default="[1,1,2,2,3,3]")
 parser.add_argument('--cam_id'          , default="rtsp://admin:admin1234@192.168.15.220:554/Streaming/channels/402")
 parser.add_argument('--input_file_name' , default="a")
-parser.add_argument('--output_file_name', default="../data/track_video/track.avi")
-parser.add_argument('--wifi_path'       , default="../wifi_data/")
-parser.add_argument('--zone_wifi_path'  , default="../")
+parser.add_argument('--output_file_name', default="data/track_video/track.avi")
+parser.add_argument('--wifi_path'       , default="wifi_data/")
+parser.add_argument('--zone_wifi_path'  , default="")
 args = parser.parse_args()
 
 def main():
@@ -641,7 +641,7 @@ def main():
             break
 
         res, img = cap.read()
-
+        print(img.shape)
         cnt = 0
         my_batch = list()
         cnt = cnt + 1
@@ -650,8 +650,9 @@ def main():
         if not res:
             break
         img = preprocessing(h_down,h_up,w_down,w_up,gamma_vector,img,contrast_vector,args,height_min,height_fin,width)
+        print(img.shape)
         input_image, display_image, output_scale = posenet.process_input(img, scale_factor=args.scale_factor, output_stride=output_stride)
-
+        print(input_image.shape)
         if not res:
             break
 
@@ -677,10 +678,12 @@ def main():
         # test_2 = list([input_image, input_image])
         # test_3 = np.stack(test_2, axis=0)
         # print(input_image.shape,img.shape)
-        input_image=torch.Tensor(input_image.cuda())
+        
+        input_image=torch.Tensor(input_image).cuda()
+
         heatmaps_result, offsets_result, displacement_fwd_result, displacement_bwd_result = model(input_image)
 
-        pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(axis=0), offsets_result.squeeze(axis=0), displacement_fwd_result.squeeze(axis=0), displacement_bwd_result.squeeze(axis=0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
+        pose_scores, keypoint_scores, keypoint_coords = posenet.decode_multi.decode_multiple_poses( heatmaps_result.squeeze(0), offsets_result.squeeze(0), displacement_fwd_result.squeeze(0), displacement_bwd_result.squeeze(0), output_stride=output_stride, max_pose_detections=10, min_pose_score=0.15)
         keypoint_coords *= output_scale
 
         if args.part_shown==0:

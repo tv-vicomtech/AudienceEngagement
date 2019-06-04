@@ -10,7 +10,7 @@ def valid_resolution(width, height, output_stride=16):
     return target_width, target_height
 
 
-def _process_input(source_img, scale_factor=1.0, output_stride=16):
+def process_input(source_img, scale_factor=1.0, output_stride=16):
     target_width, target_height = valid_resolution(
         source_img.shape[1] * scale_factor, source_img.shape[0] * scale_factor, output_stride=output_stride)
     scale = np.array([source_img.shape[0] / target_height, source_img.shape[1] / target_width])
@@ -26,7 +26,7 @@ def read_cap(cap, scale_factor=1.0, output_stride=16):
     res, img = cap.read()
     if not res:
         raise IOError("webcam failure")
-    return _process_input(img, scale_factor, output_stride)
+    return process_input(img, scale_factor, output_stride)
 
 
 def read_imgfile(path, scale_factor=1.0, output_stride=16):
@@ -101,3 +101,111 @@ def draw_skel_and_kp(
             flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
     out_img = cv2.polylines(out_img, adjacent_keypoints, isClosed=False, color=(255, 255, 0))
     return out_img
+def draw_face(
+        img, instance_scores, keypoint_scores, keypoint_coords,
+        min_pose_score=0.5, min_part_score=0.5):
+    out_img = img
+    adjacent_keypoints = []
+    cv_keypoints = []
+    for ii, score in enumerate(instance_scores):
+        if score < min_pose_score:
+            continue
+
+        for ks, kc in zip(keypoint_scores[ii, :], keypoint_coords[ii, :, :]):
+            if ks < min_part_score:
+                continue
+            cv_keypoints.append(cv2.KeyPoint(kc[1], kc[0], 10. * ks))
+
+    out_img = cv2.drawKeypoints(out_img, cv_keypoints, outImage=np.array([]), color=(0, 0, 255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    return out_img
+
+def draw_arm_right(
+        img, instance_scores, keypoint_scores, keypoint_coords,
+        min_pose_score=0.5, min_part_score=0.5):
+    out_img = img
+    adjacent_keypoints = []
+    cv_keypoints = []
+    for ii, score in enumerate(instance_scores):
+        if score < min_pose_score:
+            continue
+
+        for ks, kc in zip(keypoint_scores[ii], keypoint_coords[ii]):
+            if ks < min_part_score:
+                continue
+            cv_keypoints.append(cv2.KeyPoint(kc[1], kc[0], 10. * ks))
+
+    out_img = cv2.drawKeypoints(out_img, cv_keypoints, outImage=np.array([]), color=(0, 0, 255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    return out_img
+
+def draw_arm_left(
+        img, instance_scores, keypoint_scores, keypoint_coords,
+        min_pose_score=0.5, min_part_score=0.5):
+    out_img = img
+    adjacent_keypoints = []
+    cv_keypoints = []
+    for ii, score in enumerate(instance_scores):
+        if score < min_pose_score:
+            continue
+ 
+        for ks, kc in zip(keypoint_scores[ii], keypoint_coords[ii]):
+            if ks < min_part_score:
+                continue
+            cv_keypoints.append(cv2.KeyPoint(kc[1], kc[0], 10. * ks))
+
+    out_img = cv2.drawKeypoints(out_img, cv_keypoints, outImage=np.array([]), color=(0, 0, 255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    return out_img
+
+def draw_chest(
+        img, instance_scores, keypoint_scores, keypoint_coords,
+        min_pose_score=0.5, min_part_score=0.5):
+    out_img = img
+    adjacent_keypoints = []
+    cv_keypoints = []
+    for ii, score in enumerate(instance_scores):
+        if score < min_pose_score:
+            continue
+ 
+        for ks, kc in zip(keypoint_scores[ii], keypoint_coords[ii]):
+            if ks < min_part_score:
+                continue
+            cv_keypoints.append(cv2.KeyPoint(kc[1], kc[0], 10. * ks))
+
+    out_img = cv2.drawKeypoints(out_img, cv_keypoints, outImage=np.array([]), color=(0, 0, 255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    return out_img
+
+def draw_means(
+        img, instance_scores, keypoint_scores, keypoint_coords,
+        min_pose_score=0.5, min_part_score=0.5):
+    out_img = img
+    adjacent_keypoints = []
+    cv_keypoints = []
+    for ii, score in enumerate(instance_scores):
+        if score < min_pose_score:
+            continue
+ 
+        for ks, kc in zip(keypoint_scores[ii], keypoint_coords[ii]):
+            if ks < min_part_score:
+                continue
+            cv_keypoints.append(cv2.KeyPoint(kc[1], kc[0], 10. * ks))
+
+    out_img = cv2.drawKeypoints(out_img, cv_keypoints, outImage=np.array([]), color=(0, 0, 255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    return out_img
+
+def draw_att(
+        img, instance_scores, keypoint_scores, keypoint_coords,
+        min_pose_score=0.5, min_part_score=0.5):
+    out_img = img
+    adjacent_keypoints = []
+    cv_keypoints = []
+    for ii, score in enumerate(instance_scores):
+        if score < min_pose_score:
+            continue
+ 
+        for ks, kc in zip(keypoint_scores[ii], keypoint_coords[ii]):
+            if ks < min_part_score:
+                continue
+            cv_keypoints.append(cv2.KeyPoint(kc[1], kc[0], 2))
+
+    out_img = cv2.drawKeypoints(out_img, cv_keypoints, outImage=np.array([]), color=(0, 0, 255), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+    return out_img
+
