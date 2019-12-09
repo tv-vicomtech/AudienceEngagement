@@ -235,3 +235,17 @@ The test done are:
 # Hybrid
 
 This part is based on the results of both method to perform changes to the techniques and improve their results.
+
+
+# Citation
+
+If you use this code, please consider citing the following paper:
+
+```
+@inproceedings{Sanz-Narrillos2020,
+  title={Combining Video and Wireless Signals for Enhanced Audience Analysis},
+  author={Miguel Sanz-Narrillos,Stefano Masneri and Mikel Zorrilla},
+  booktitle={International Conference on Agents and Artificial Intelligence},
+  year={2020}
+}
+```
